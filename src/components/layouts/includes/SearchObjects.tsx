@@ -1,7 +1,4 @@
-import { search_vectors } from "@/actions/search_functions";
-import { search_animations } from "@/actions/search_functions";
-import { search_posters } from "@/actions/search_functions";
-import { search_brochures } from "@/actions/search_functions";
+
 import { useHome } from "@/context/home";
 import { usePathname } from "next/navigation";
 import { FiHome } from "react-icons/fi";

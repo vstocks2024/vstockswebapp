@@ -57,7 +57,7 @@ export default function BrochuresPage({
   const router = useRouter();
   const [isFilters, setIsFilters] = useState<boolean>(false);
   const [isSortBy, setIsSortBy] = useState<boolean>(false);
-  const [openVector, setOpenVector] = useState<boolean>(false);
+  const [openBrochures, setOpenBrochures] = useState<boolean>(false);
   const [index, setIndex] = useState(0);
   var whichVector = whichVectors[index];
   const [likeColor, setLikeColor] = useState<boolean>(false);
@@ -99,7 +99,7 @@ const handlePosters=()=>{
       <MainLayout>
       <main className="bg-white">
       <div className="container mx-auto">
-          <div className="flex mx-20 py-[50px] flex-col  gap-x-10 md:flex-row  justify-center items-center">
+      <div className="flex mx-20 py-[50px] flex-col gap-y-5  md:gap-y-0 md:gap-x-10 md:flex-row  justify-center items-center">
             <button
               type="button"
               onClick={handleVectors}

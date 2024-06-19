@@ -12,7 +12,7 @@ export default function Category() {
           <h1 className=" text-center text-[20px]  sm:text-[25px] md:text-[30px] lg:[35px] xl:text-[40px] font-semibold text-[#1E1E1E]  font-poppins600  tracking-[0.0375rem] text-nowrap">
             Unleash Your Creativity with V-Stocks!
           </h1>
-          <h4 className="text-center  text-[11px] sm:text-[13.5px] md:text-[16px] lg:text-[18.5px] xl:text-[22px] tracking-[0.02063rem] font-normal text-[#000]  text-wrap">
+          <h4 className="text-center hover:brightness-200  text-[11px] sm:text-[13.5px] md:text-[16px] lg:text-[18.5px] xl:text-[22px] tracking-[0.02063rem] font-normal text-[#000]  text-wrap">
             Where Ideas Come to Life - Your One Stop Destination for Stunning
             Visual Content
           </h4>

@@ -1,5 +1,13 @@
 "use client";
 
+import {
+  Carousel,
+  CarouselContent,
+  CarouselItem,
+  CarouselNext,
+  CarouselPrevious,
+} from "@/components/ui/carousel";
+
 import Image from "next/image";
 import React, { useState, Suspense } from "react";
 
@@ -57,7 +65,7 @@ export default function AnimationsPage({
   const router = useRouter();
   const [isFilters, setIsFilters] = useState<boolean>(false);
   const [isSortBy, setIsSortBy] = useState<boolean>(false);
-  const [openVector, setOpenVector] = useState<boolean>(false);
+  const [openAnimations, setOpenAnimations] = useState<boolean>(true);
   const [index, setIndex] = useState(0);
   var whichVector = whichVectors[index];
   const [likeColor, setLikeColor] = useState<boolean>(false);
@@ -72,158 +80,204 @@ export default function AnimationsPage({
   //   ? (whichVectors.length % 30)-1
   //   : (whichVectors.length % 30);
   const home = useHome();
-  const sortBy=useSort();
+  const sortBy = useSort();
   const [onVectors, setOnVectors] = useState<boolean>(false);
   const [onAnimations, setOnAnimations] = useState<boolean>(true);
   const [onPosters, setOnPosters] = useState<boolean>(false);
   const [onBrochures, setOnBrochures] = useState<boolean>(false);
 
-  const handleVectors=()=>{
-    
+  const handleVectors = () => {
     router.push("/home/vectors");
-  }
+  };
 
-  const handleAnimations=()=> {
-    router.push("/home/animations")
-  }
-const handlePosters=()=>{
-    router.push("/home/posters")
-  }
+  const handleAnimations = () => {
+    router.push("/home/animations");
+  };
+  const handlePosters = () => {
+    router.push("/home/posters");
+  };
 
-  const handleBrochures=()=>{
-    router.push("/home/brochures")
-
-  }
+  const handleBrochures = () => {
+    router.push("/home/brochures");
+  };
 
   return (
     <>
       <MainLayout>
-      <main className="bg-white">
-      <div className="container mx-auto">
-          <div className="flex mx-20 py-[50px] flex-col  gap-x-10 md:flex-row  justify-center items-center">
-            <button
-              type="button"
-              onClick={handleVectors}
-              className={`${
-                onVectors === true
-                  ? "bg-[#2E67DD] text-white font-medium border-white"
-                  : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
-              } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border`}
-            >
-              Vectors
-            </button>
-            <button
-              type="button"
-              onClick={handleAnimations}
-              className={`${
-                onAnimations === true
-                  ? "bg-[#2E67DD] text-white font-medium border-white"
-                  : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
-              } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border`}
-            >
-              Animations
-            </button>
-            <button
-              type="button"
-              onClick={handlePosters}
-              className={`${
-                onPosters === true
-                  ? "bg-[#2E67DD] text-white font-medium border-white"
-                  : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
-              } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border`}
-            >
-              Posters
-            </button>
-            <button
-              type="button"
-              onClick={handleBrochures}
-              className={`${
-                onBrochures === true
-                  ? "bg-[#2E67DD] text-white font-medium border-white"
-                  : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
-              } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border `}
-            >
-              Brouchers
-            </button>
-          </div>
-
-          {/* Filter and SortBy Component Section */}
-
-          <div className="flex mx-20 py-4  items-center   justify-between">
-            <div className="inline-flex flex-row items-center justify-between m-1">
-              <span className="px-1 py-2 cursor-pointer">
-                <BsSliders size={20} />
-              </span>
-              <span className="font-semibold p-1 inline-flex flex-row items-center justify-between cursor-pointer">
-                <h3 className=" text-mycolor5 font-poppins600 text-[20px] font-medium not-italic text-center">
-                  Filters
-                </h3>
-                <button onClick={() => {setIsFilters(!isFilters);
-                  setIsSortBy(false);
-                }} className="">
-                  {isFilters ? (
-                    <MdKeyboardArrowUp size={24} />
-                  ) : (
-                    <MdKeyboardArrowDown size={24} />
-                  )}
-                </button>
-              </span>
+        <main className="bg-white">
+          <div className="container mx-auto">
+            <div className="flex mx-20 py-[50px] flex-col gap-y-5  md:gap-y-0 md:gap-x-10 md:flex-row  justify-center items-center">
+              <button
+                type="button"
+                onClick={handleVectors}
+                className={`${
+                  onVectors === true
+                    ? "bg-[#2E67DD] text-white font-medium border-white"
+                    : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
+                } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border`}
+              >
+                Vectors
+              </button>
+              <button
+                type="button"
+                onClick={handleAnimations}
+                className={`${
+                  onAnimations === true
+                    ? "bg-[#2E67DD] text-white font-medium border-white"
+                    : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
+                } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border`}
+              >
+                Animations
+              </button>
+              <button
+                type="button"
+                onClick={handlePosters}
+                className={`${
+                  onPosters === true
+                    ? "bg-[#2E67DD] text-white font-medium border-white"
+                    : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
+                } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border`}
+              >
+                Posters
+              </button>
+              <button
+                type="button"
+                onClick={handleBrochures}
+                className={`${
+                  onBrochures === true
+                    ? "bg-[#2E67DD] text-white font-medium border-white"
+                    : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
+                } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border `}
+              >
+                Brouchers
+              </button>
             </div>
-            <div className="inline-flex flex=-row items-center justify-between">
-              <span className="p-1 inline-flex">
-                <h3 className="text-mycolor5 font-poppins600 text-[20px] font-normal not-italic text-center">
-                  Sort By&nbsp;&nbsp;&nbsp;
-                  <b className=" not-italic text-[20px] font-poppins600 font-medium">
-                  {sortBy.sort}
-                  </b>
-                </h3>
-                <button className="" onClick={() =>{setIsSortBy(!isSortBy);
-                  setIsFilters(false);}
-                }>
-                  {isSortBy ? (
-                    <MdKeyboardArrowUp size={24} />
-                  ) : (
-                    <MdKeyboardArrowDown size={24} />
-                  )}
-                </button>
-              </span>
-            </div>
-          </div>
 
-          {/* End of Filter and SortBy Component Section */}
+            {/* Filter and SortBy Component Section */}
 
-          <div
-            className={`md:relative mx-20   ${
-              (isFilters === true || isSortBy===true) ? "flex flex-row" : null
-            } `}
-          >
-            {isFilters ? <Filters /> : null}
-            
-            {/* Animations Tab Starts Here  */}
-            {onVectors === false &&
-            onAnimations === true &&
-            onPosters === false &&
-            onBrochures === false ? (
-              <div className="items-center justify-start flex flex-col  mx-0.5 my-2 p-1">
-                <div
-                  className={`grid grid-cols-2 w-full p-1   place-items-center place-content-evenly auto-rows-max justify-center items-center gap-2 ${
-                    (isFilters === true || isSortBy===true)
-                      ? "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
-                      : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
-                  }`}
-                >
-                  <AddCard />
-                 
-                </div>
+            <div className="flex mx-20 py-4  items-center   justify-between">
+              <div className="inline-flex flex-row items-center justify-between m-1">
+                <span className="px-1 py-2 cursor-pointer">
+                  <BsSliders size={20} />
+                </span>
+                <span className="font-semibold p-1 inline-flex flex-row items-center justify-between cursor-pointer">
+                  <h3 className=" text-mycolor5 font-poppins600 text-[20px] font-medium not-italic text-center">
+                    Filters
+                  </h3>
+                  <button
+                    onClick={() => {
+                      setIsFilters(!isFilters);
+                      setIsSortBy(false);
+                    }}
+                    className=""
+                  >
+                    {isFilters ? (
+                      <MdKeyboardArrowUp size={24} />
+                    ) : (
+                      <MdKeyboardArrowDown size={24} />
+                    )}
+                  </button>
+                </span>
               </div>
-            ) : null}
-            {/* Animations Tab Ends Here */}
+              <div className="inline-flex flex=-row items-center justify-between">
+                <span className="p-1 inline-flex">
+                  <h3 className="text-mycolor5 font-poppins600 text-[20px] font-normal not-italic text-center">
+                    Sort By&nbsp;&nbsp;&nbsp;
+                    <b className=" not-italic text-[20px] font-poppins600 font-medium">
+                      {sortBy.sort}
+                    </b>
+                  </h3>
+                  <button
+                    className=""
+                    onClick={() => {
+                      setIsSortBy(!isSortBy);
+                      setIsFilters(false);
+                    }}
+                  >
+                    {isSortBy ? (
+                      <MdKeyboardArrowUp size={24} />
+                    ) : (
+                      <MdKeyboardArrowDown size={24} />
+                    )}
+                  </button>
+                </span>
+              </div>
+            </div>
 
-          {/* SortBy Component Conditional Rendering */}
-          {isSortBy===true ? <SortBy/>:null}
-          {/* End of SortBy Component Conditional Rendering */}
+            {/* End of Filter and SortBy Component Section */}
+
+            <div
+              className={`md:relative mx-20   ${
+                isFilters === true || isSortBy === true ? "flex flex-row" : null
+              } `}
+            >
+              {isFilters ? <Filters /> : null}
+
+              {/* Animations Tab Starts Here  */}
+              {onVectors === false &&
+              onAnimations === true &&
+              onPosters === false &&
+              onBrochures === false ? (
+                <div className="items-center justify-start flex flex-col  mx-0.5 my-2 p-1">
+                  <div
+                    className={`grid grid-cols-2 w-full p-1   place-items-center place-content-evenly auto-rows-max justify-center items-center gap-2 ${
+                      isFilters === true || isSortBy === true
+                        ? "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+                        : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+                    }`}
+                  >
+                    <AddCard />
+                    {/* Do Conditional Rendering od animations here  */}
+
+                    {/* Conditional Rendering Ends here */}
+
+                    {/* Animations Overlay page starts here  */}
+                    {openAnimations === true ? (
+                      <div className="fixed flex flex-grow items-center justify-center p-2 md:p-2  top-0 left-0 w-full h-full bg-black bg-opacity-50">
+                        <div
+                          className={`fixed z-20 flex flex-row rounded-md  bg-white w-[75%] h-[95vh]`}
+                        >
+                           <div className="absolute z-10 -right-1  border cursor-pointer border-red-400 m-0.5 flex items-center">
+                          <AiOutlineClose
+                            onClick={() => {
+                              setOpenAnimations(false);
+                            }}
+                            size={30}
+                            className="m-0.5 p-1 absolute top-0"
+                            color="#FFF"
+                          />
+                          </div>
+                          
+                          <Carousel className="border border-red-500 m-1 p-1  w-full">
+                            <CarouselContent className="basis-[100%]">
+                              <CarouselItem className="border border-black w-full basis-[100%]">
+                                <div className=" bg-green-500 ml-1 w-[100px] h-[100px]" ></div>
+                              </CarouselItem>
+                              <CarouselItem className="border border-black basis-[100%]">
+                                <div className=" bg-red-500 ml-1 w-[100px] h-[100px]" ></div>
+                              </CarouselItem>
+                              <CarouselItem className="border border-black basis-[100%]">
+                                <div className=" bg-pink-500 ml-1 w-[100px] h-[100px]" ></div>
+                              </CarouselItem>
+                            </CarouselContent>
+                            <CarouselPrevious/>
+                            <CarouselNext/>
+                          </Carousel>
+                        </div>
+                      </div>
+                    ) : null}
+
+                    {/* Animations Overlay page ends here  */}
+                  </div>
+                </div>
+              ) : null}
+              {/* Animations Tab Ends Here */}
+
+              {/* SortBy Component Conditional Rendering */}
+              {isSortBy === true ? <SortBy /> : null}
+              {/* End of SortBy Component Conditional Rendering */}
+            </div>
           </div>
-     </div>
         </main>
       </MainLayout>
     </>

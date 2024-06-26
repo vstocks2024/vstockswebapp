@@ -42,12 +42,27 @@ import { CiHeart } from "react-icons/ci";
 import { PiShare, PiShareFatFill } from "react-icons/pi";
 import { FaHeart } from "react-icons/fa";
 import { RiLoaderFill } from "react-icons/ri";
-import Pagination from "../../../components/Pagination";
+//import Pagination from "../../../components/Pagination";
 import getFilteredVectors from "../../../functions/getFilteredVectors";
 import { useHome } from "../../../context/home";
 import AddCard from "../../../components/AddCard";
 import { useSort } from "../../../context/sort";
 import MainLayout from "@/components/layouts/MainLayout";
+
+//////////////Shadcn UI Pagination starts/////////////
+
+import {
+  Pagination,
+  PaginationContent,
+  PaginationEllipsis,
+  PaginationItem,
+  PaginationLink,
+  PaginationNext,
+  PaginationPrevious,
+} from "@/components/ui/pagination";
+
+//////////////////////////////////////////////////////
+
 export default function AnimationsPage({
   searchParams,
 }: {
@@ -237,31 +252,31 @@ export default function AnimationsPage({
                         <div
                           className={`fixed z-20 flex flex-row rounded-md  bg-white w-[75%] h-[95vh]`}
                         >
-                           <div className="absolute z-10 -right-1  border cursor-pointer border-red-400 m-0.5 flex items-center">
-                          <AiOutlineClose
-                            onClick={() => {
-                              setOpenAnimations(false);
-                            }}
-                            size={30}
-                            className="m-0.5 p-1 absolute top-0"
-                            color="#FFF"
-                          />
+                          <div className="absolute z-10 -right-1  border cursor-pointer border-red-400 m-0.5 flex items-center">
+                            <AiOutlineClose
+                              onClick={() => {
+                                setOpenAnimations(false);
+                              }}
+                              size={30}
+                              className="m-0.5 p-1 absolute top-0"
+                              color="white"
+                            />
                           </div>
-                          
+
                           <Carousel className="border border-red-500 m-1 p-1  w-full">
                             <CarouselContent className="basis-[100%]">
                               <CarouselItem className="border border-black w-full basis-[100%]">
-                                <div className=" bg-green-500 ml-1 w-[100px] h-[100px]" ></div>
+                                <div className=" bg-green-500 ml-1 w-[100px] h-[100px]"></div>
                               </CarouselItem>
                               <CarouselItem className="border border-black basis-[100%]">
-                                <div className=" bg-red-500 ml-1 w-[100px] h-[100px]" ></div>
+                                <div className=" bg-red-500 ml-1 w-[100px] h-[100px]"></div>
                               </CarouselItem>
                               <CarouselItem className="border border-black basis-[100%]">
-                                <div className=" bg-pink-500 ml-1 w-[100px] h-[100px]" ></div>
+                                <div className=" bg-pink-500 ml-1 w-[100px] h-[100px]"></div>
                               </CarouselItem>
                             </CarouselContent>
-                            <CarouselPrevious/>
-                            <CarouselNext/>
+                            <CarouselPrevious />
+                            <CarouselNext />
                           </Carousel>
                         </div>
                       </div>
@@ -276,6 +291,26 @@ export default function AnimationsPage({
               {/* SortBy Component Conditional Rendering */}
               {isSortBy === true ? <SortBy /> : null}
               {/* End of SortBy Component Conditional Rendering */}
+
+              {/* Pagination Starts here */}
+              <Pagination>
+                <PaginationContent>
+                  <PaginationItem>
+                    <PaginationPrevious href="#" />
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationLink href="#">1</PaginationLink>
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationEllipsis />
+                  </PaginationItem>
+                  <PaginationItem>
+                    <PaginationNext href="#" />
+                  </PaginationItem>
+                </PaginationContent>
+              </Pagination>
+
+              {/* Pagination Ends here */}
             </div>
           </div>
         </main>

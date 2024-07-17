@@ -15,6 +15,8 @@ import { MdArrowForwardIos } from "react-icons/md";
 import { useUser } from "@/context/user";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
 import { IoTriangle } from "react-icons/io5";
+import TemplatesDropDownCard from "@/components/TemplatesDropDownCard";
+
 
 export default function NavBar() {
   const [hamburger, setHamburger] = useState<boolean>(false);
@@ -24,7 +26,7 @@ export default function NavBar() {
   const router = useRouter();
   const user = useUser();
   const pathname=usePathname();
-  const templatedropdownarr=[["Dussehra","Diwali","Christmas","Pongal","Holi","Ugadhi","Sankranti"],["Education","Health","Jewellery","Real Estate","Retail","Travel","Others"],["Birthday","Wedding","Invitation","House Warming","Festival","Occassion"],["Birthday","Wedding","Invitation","House Warming","Festival","Occassion"]]
+  
 
 
 
@@ -152,7 +154,7 @@ export default function NavBar() {
           </div>
         </>
       ) : null}
-      <div className="lg:hidden p-1 w-full flex flex-row items-center justify-between">
+      <div className="lg:hidden   p-1 w-full flex flex-row items-center justify-between">
         <div className="m-1 p-1 border border-green-500">
           <Link
             className="text-[22px] font-semibold font-poppins600 not-italic text-white cursor-pointer text-nowrap"
@@ -172,9 +174,9 @@ export default function NavBar() {
           </button>
         </div>
       </div>
-      <div className="hidden lg:flex lg:py-3 justify-between items-center  ">
+      <div className="hidden lg:flex lg:py-3 justify-between items-center ">
         <div className="lg:relative my-1">
-        <nav className="flex flex-row items-center justify-center ">
+        <nav className="flex flex-row items-center justify-center">
           <ul className="text-white  font-light lg:gap-x-[82px]  dark:text-white inline-flex flex-row  justify-around">
             <button
               type="button"
@@ -216,24 +218,7 @@ export default function NavBar() {
                   )}
                 </span>
               </li>
-             {template===true ? (<div className="absolute delay-200  transition  ease-in-out  top-[70px] p-8 h-[300px] z-20 bg-white w-[720px] -left-[200px] shadow-templatedropdown rounded-[25px] border-solid border border-black">
-             <div className=""></div>
-              <div className=" h-full flex flex-row px-4 py-2 items-start justify-between">
-                {
-                  templatedropdownarr.map((template,ind,oa)=>{
-                    return (<><ul className="m-1 p-1 inline-flex flex-col items-start justify-between gap-y-1.5" key={`${template}_${ind}`} >
-                      {
-                        template.map((val,ind1,oa1)=>{
-                          return (<><li className="hover:scale-110  duration-100 ease-in-out transition" key={`${val}_${ind1}`}>
-                            <Link href={"/home"} className=" hover:underline text-black font-poppins400 text-[16px] font-medium">{val}</Link>
-                            </li></>);
-                        })
-                      }
-                      </ul></>);
-                  })
-                }
-              </div>
-             </div>):null}
+             {template===true ? (<TemplatesDropDownCard/>):null}
             </button>
             <button
               type="button"

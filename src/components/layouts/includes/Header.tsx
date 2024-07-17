@@ -25,6 +25,9 @@ export default function Header() {
             {
             pathname === "/home/vectors" ?<><VectorsSearchBar/></>:null 
           }
+            {
+            pathname === "/home/vectors1" ?<><VectorsSearchBar/></>:null 
+          }
 
           {
             pathname === "/home/animations" ?<><AnimationsSearchBar/></>:null 

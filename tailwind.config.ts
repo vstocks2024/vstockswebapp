@@ -17,10 +17,17 @@ const config = {
       center: true,
       padding: "2rem",
       screens: {
-        "2xl": "1400px",
+        
+        '2xl': '1400px',
+        '3xl':'1700px',
+        
+        
       },
     },
     extend: {
+      screens:{
+        
+      },
       fontFamily:{
         sans: ["var(--font-sans)","var(--font-lusitana)", ...fontFamily.sans],
         poppins600: ['var(--font-poppins600)'],

@@ -239,6 +239,7 @@ const handlePosters=()=>{
                         <img
                           className="object-fill rounded cursor-pointer"
                           src={vector.url}
+                          loading="lazy"
                         />
                       </button>
                       

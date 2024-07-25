@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
-import { Inter, Poppins, Montserrat, Roboto} from "next/font/google";
+import { Inter, Poppins, Montserrat, Roboto } from "next/font/google";
 import UserProvider from "../context/user";
 import HomeProvider from "../context/home";
 import SortProvider from "../context/sort";
+import ModalProvider from "../context/modal";
+import FilterProvider from "../context/filter";
 
 import "./globals.css";
 
@@ -19,11 +21,18 @@ const poppins400 = Poppins({
   weight: "400",
   style: "normal",
 });
-const montserrat400 = Montserrat({ weight: "400", subsets: ["latin"],
-  variable:"--font-montserrat400",
-  style:"normal"
- });
- const roboto500= Roboto({ weight:"500", subsets:["latin"], variable:"--font-roboto500",style:"normal"});
+const montserrat400 = Montserrat({
+  weight: "400",
+  subsets: ["latin"],
+  variable: "--font-montserrat400",
+  style: "normal",
+});
+const roboto500 = Roboto({
+  weight: "500",
+  subsets: ["latin"],
+  variable: "--font-roboto500",
+  style: "normal",
+});
 
 export const metadata: Metadata = {
   title: "VSTOCKS",
@@ -38,11 +47,15 @@ export default function RootLayout({
   return (
     <html lang="en">
       <UserProvider>
-      <HomeProvider>
-      <SortProvider>
-      <body className={inter.className}>{children}</body>
-      </SortProvider>
-      </HomeProvider>
+        <HomeProvider>
+          <FilterProvider>
+            <SortProvider>
+              <ModalProvider>
+                <body className={inter.className}>{children}</body>
+              </ModalProvider>
+            </SortProvider>
+          </FilterProvider>
+        </HomeProvider>
       </UserProvider>
     </html>
   );

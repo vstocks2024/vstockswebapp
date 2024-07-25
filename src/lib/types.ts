@@ -1,0 +1,44 @@
+import { z } from "zod";
+
+export const Vector_Url = z.object({
+  vector_id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  likes: z.number(),
+  shares: z.number(),
+  format: z.string(),
+  url: z.string(),
+  width: z.number(),
+  height: z.number(),
+  license: z.string(),
+  orientation: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export const Vector_Category = z.object({
+  vector_id: z.string(),
+  category_id: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export const Vector_Tag = z.object({
+  vector_id: z.string(),
+  tag_id: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});
+
+export const TotalPages = z.object({
+  currentPage: z.number(),
+  totalPages: z.number(),
+});
+
+export const Tags = z.object({
+  id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});

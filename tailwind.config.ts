@@ -1,15 +1,18 @@
 import { Lusitana } from "next/font/google";
 import type { Config } from "tailwindcss"
 const { fontFamily } = require("tailwindcss/defaultTheme");
+import  flowbite from "flowbite-react/tailwind";
 
 
 const config = {
   darkMode: ["class"],
   content: [
+    "./node_modules/flowbite-react/lib/**/*.js",
     './pages/**/*.{ts,tsx}',
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',
     './src/**/*.{ts,tsx}',
+    flowbite.content(),
 	],
   prefix: "",
   theme: {
@@ -108,7 +111,11 @@ const config = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [
+    require("tailwindcss-animate"),
+    require("flowbite/plugin"),
+    flowbite.plugin(),
+  ],
 } satisfies Config
 
 export default config

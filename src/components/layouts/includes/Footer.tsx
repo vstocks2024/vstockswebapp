@@ -6,7 +6,7 @@ import { MdFacebook } from "react-icons/md";
 import { FaXTwitter } from "react-icons/fa6";
 import { FaInstagram } from "react-icons/fa";
 import Image from "next/image";
-import { usePathname } from "next/navigation";
+
 
 export default function Footer(){
   

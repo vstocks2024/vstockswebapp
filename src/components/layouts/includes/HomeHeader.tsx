@@ -1,7 +1,9 @@
-
+// "use client"
 import NavBar from "./NavBar";
-import SearchBar from "./SearchBar";
-export default function Header() {
+
+import HomeSearchBar from "./HomeSearchBar";
+
+export default function HomeHeader() {
   // const pathname = usePathname();
 
   return (
@@ -9,7 +11,7 @@ export default function Header() {
       <div className={`bg-[#2E67DD] shadow-headershadow `}>
         <header className={`bg-[#2E67DD] container mx-auto`}>
           <NavBar />
-          <SearchBar/>
+          <HomeSearchBar/>
           {/* {pathname === "/home" ? (
             <>
               <HomeSearchBar />{" "}

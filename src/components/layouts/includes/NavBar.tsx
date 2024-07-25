@@ -10,25 +10,20 @@ import {
 import Link from "next/link";
 import Image from "next/image";
 import { FaRegUser } from "react-icons/fa";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { MdArrowForwardIos } from "react-icons/md";
 import { useUser } from "@/context/user";
 import { BsChevronDown, BsChevronUp } from "react-icons/bs";
-import { IoTriangle } from "react-icons/io5";
-import TemplatesDropDownCard from "@/components/TemplatesDropDownCard";
 
+import TemplatesDropDownCard from "@/components/TemplatesDropDownCard";
 
 export default function NavBar() {
   const [hamburger, setHamburger] = useState<boolean>(false);
   const [template, setTemplate] = useState<boolean>(false);
   const [isMenu, setIsMenu] = useState<boolean>(false);
-  const [templatemenu,setTemplateMenu]=useState<boolean>(false);
+  const [templatemenu, setTemplateMenu] = useState<boolean>(false);
   const router = useRouter();
   const user = useUser();
-  const pathname=usePathname();
-  
-
-
 
   console.log(user);
 
@@ -79,7 +74,9 @@ export default function NavBar() {
   };
 
   return (
-    <div className={`bg-[#2E67DD] mx-16   flex-grow  flex flex-col items-center justify-center lg:py-5`}>
+    <div
+      className={`bg-[#2E67DD] mx-16   flex-grow  flex flex-col items-center justify-center lg:py-5`}
+    >
       {hamburger ? (
         <>
           <div className="absolute text-black top-0 left-0 w-[70%] z-10  h-svh bg-[#EDEDED]  flex flex-col md:hidden">
@@ -176,106 +173,109 @@ export default function NavBar() {
       </div>
       <div className="hidden lg:flex lg:py-3 justify-between items-center ">
         <div className="lg:relative my-1">
-        <nav className="flex flex-row items-center justify-center">
-          <ul className="text-white  font-light lg:gap-x-[82px]  dark:text-white inline-flex flex-row  justify-around">
-            <button
-              type="button"
-              onClick={() => {
-                router.push("/");
-              }}
-            >
-              <li className="text-[36px]  m-1 p-1 font-semibold font-poppins600 not-italic text-white cursor-pointer text-nowrap">
-                V&nbsp;stocks
-              </li>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                router.push("/home");
-                setHamburger(!hamburger);
-              }}
-            >
-              <li className=" font-poppins400  text-[20px] flex items-center m-1  cursor-pointer">
-                Home
-              </li>
-            </button>
-            <button
-              onMouseEnter={() => {
-                setTemplate(true);
-              }}
-              onMouseLeave={() => {
-                setTemplate(false);
-              }}
-              className="relative m-0.5 p-0.5"
-            >
-              <li className=" m-1 font-poppins400 text-[20px] gap-x-1  cursor-pointer inline-flex flex-row  items-center  justify-center">
-                <span className=" text-nowrap">Template</span>
-                <span>
-                  {template ? (
-                    <MdKeyboardArrowUp className="duration-200  transition-all" size={25} />
-                  ) : (
-                    <MdKeyboardArrowDown className="duration-200   transition-all" size={25} />
-                  )}
-                </span>
-              </li>
-             {template===true ? (<TemplatesDropDownCard/>):null}
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                router.push("/projects");
-                setHamburger(!hamburger);
-              }}
-            >
-              <li className="cursor-pointer font-poppins400 text-[20px]  text-nowrap flex items-center  m-1 ">
-                My Projects
-              </li>
-            </button>
-            <button
-              type="button"
-              onClick={() => {
-                router.push("/premium");
-                setHamburger(!hamburger);
-              }}
-            >
-              <li className="cursor-pointer font-poppins400 text-[20px]  m-1  flex items-center ">
-                Premium
-              </li>
-            </button>
-            <li className="relative inline-flex items-center justify-between">
-              {isLoggedIn()}
-              <div
-                id="AuthDropdown"
-                className={`absolute bg-white w-[110px] text-[#333333] z-40 top-11 left-16 rounded-b-md border shadow-lg
+          <nav className="flex flex-row items-center justify-center">
+            <ul className="text-white  font-light lg:gap-x-[82px]  dark:text-white inline-flex flex-row  justify-around">
+              <button
+                type="button"
+                onClick={() => {
+                  router.push("/");
+                }}
+              >
+                <li className="text-[36px]  m-1 p-1 font-semibold font-poppins600 not-italic text-white cursor-pointer text-nowrap">
+                  V&nbsp;stocks
+                </li>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  router.push("/home");
+                  setHamburger(!hamburger);
+                }}
+              >
+                <li className=" font-poppins400  text-[20px] flex items-center m-1  cursor-pointer">
+                  Home
+                </li>
+              </button>
+              <button
+                onMouseEnter={() => {
+                  setTemplate(true);
+                }}
+                onMouseLeave={() => {
+                  setTemplate(false);
+                }}
+                className="relative m-0.5 p-0.5"
+              >
+                <li className=" m-1 font-poppins400 text-[20px] gap-x-1  cursor-pointer inline-flex flex-row  items-center  justify-center">
+                  <span className=" text-nowrap">Template</span>
+                  <span>
+                    {template ? (
+                      <MdKeyboardArrowUp
+                        className="duration-200  transition-all"
+                        size={25}
+                      />
+                    ) : (
+                      <MdKeyboardArrowDown
+                        className="duration-200   transition-all"
+                        size={25}
+                      />
+                    )}
+                  </span>
+                </li>
+                {template === true ? <TemplatesDropDownCard /> : null}
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  router.push("/projects");
+                  setHamburger(!hamburger);
+                }}
+              >
+                <li className="cursor-pointer font-poppins400 text-[20px]  text-nowrap flex items-center  m-1 ">
+                  My Projects
+                </li>
+              </button>
+              <button
+                type="button"
+                onClick={() => {
+                  router.push("/premium");
+                  setHamburger(!hamburger);
+                }}
+              >
+                <li className="cursor-pointer font-poppins400 text-[20px]  m-1  flex items-center ">
+                  Premium
+                </li>
+              </button>
+              <li className="relative inline-flex items-center justify-between">
+                {isLoggedIn()}
+                <div
+                  id="AuthDropdown"
+                  className={`absolute bg-white w-[110px] text-[#333333] z-40 top-11 left-16 rounded-b-md border shadow-lg
                         ${isMenu ? "visible" : "hidden"}
                     `}
-              >
-                <ul className="bg-white">
-                  <li className="text-[11px] font-poppins600 py-1 px-2 w-full hover:underline text-[#2E67DD]  cursor-pointer">
-                    <Link href="/profile">My Subscription</Link>
-                  </li>
-                  <li className="text-[11px] font-poppins600 py-1 px-2 w-full hover:underline text-[#2E67DD]  cursor-pointer">
-                    <Link href="/orders">My Orders</Link>
-                  </li>
-                  <li
-                    onClick={() => {
-                      user.signOut();
-                      setIsMenu(false);
-                    }}
-                    className="text-[11px] font-poppins600 py-1 px-2 w-full hover:underline text-[#2E67DD] cursor-pointer"
-                  >
-                    Log Out
-                  </li>
-                </ul>
-              </div>
-            </li>
-          </ul>
-        </nav>
+                >
+                  <ul className="bg-white">
+                    <li className="text-[11px] font-poppins600 py-1 px-2 w-full hover:underline text-[#2E67DD]  cursor-pointer">
+                      <Link href="/profile">My Subscription</Link>
+                    </li>
+                    <li className="text-[11px] font-poppins600 py-1 px-2 w-full hover:underline text-[#2E67DD]  cursor-pointer">
+                      <Link href="/orders">My Orders</Link>
+                    </li>
+                    <li
+                      onClick={() => {
+                        user.signOut();
+                        setIsMenu(false);
+                      }}
+                      className="text-[11px] font-poppins600 py-1 px-2 w-full hover:underline text-[#2E67DD] cursor-pointer"
+                    >
+                      Log Out
+                    </li>
+                  </ul>
+                </div>
+              </li>
+            </ul>
+          </nav>
         </div>
       </div>
     </div>
   );
 }
-
-
-

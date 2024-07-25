@@ -5,12 +5,11 @@ const Context = createContext();
 
 const Provider = ({ children }) => {
     const router = useRouter();
-    const [sort, setSort] = useState("Most Relevant");
-    const [openSort,setOpenSort]=useState(false);
-    const exposed = {sort,setSort,openSort,setOpenSort};
+    const [openFilter,setOpenFilter]=useState(false);
+    const exposed = {openFilter,setOpenFilter};
 
  return <Context.Provider value={exposed}>{children}</Context.Provider>;
 }
-export const useSort = () => useContext(Context);
+export const useFilter = () => useContext(Context);
 
 export default Provider;

@@ -1,5 +1,6 @@
 "use client";
 import { MdClose } from "react-icons/md";
+import Image from "next/image";
 import { FaCrown } from "react-icons/fa";
 import { LuRectangleHorizontal } from "react-icons/lu";
 import { LuSquare } from "react-icons/lu";
@@ -44,7 +45,7 @@ export default function Filters() {
         <div className=" flex flex-col w-full gap-2 justify-start px-2 py-3 ">
           <div className="flex items-center">
             <i className="size-5">
-              <img src="../../images/orientation-icon.png" />
+              <Image width={20} height={20} src={"../../images/orientation-icon.png"} alt={""}  />
             </i>
             &nbsp;&nbsp;
             <span className="text-lg font-semibold">Orientation</span>

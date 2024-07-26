@@ -76,7 +76,7 @@ export default function TemplatesDropDownCard() {
                   className=" hover:scale-110  duration-100 ease-in-out transition inline-flex flex-row items-center justify-start"
                 >
                   <Link
-                    href={`http://localhost:3000/home1/animations/category/${item.name}`}
+                    href={`/home2/vectors/category/${item.name}?page=1`}
                   >
                     <h1 className=" hover:underline text-black font-poppins400 text-[16px] font-medium">
                       {item.name}

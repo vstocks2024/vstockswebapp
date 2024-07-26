@@ -28,16 +28,14 @@ import SimilarVectors from "./SimilarVectors";
 import ModalCloseButton from "./ModalCloseButton";
 import RelatedTag from "./RelatedTag";
 
-
-
 export default function VectorsGrid({
   vectorUrlData,
 }: {
   vectorUrlData: z.infer<typeof Vector_Url>[];
 }) {
   const modal = useModal();
-  const filter=useFilter();
-  const sort=useSort();
+  const filter = useFilter();
+  const sort = useSort();
   const [likes, setLikes] = useState<boolean>(false);
   modal.setVectorItemsArray(vectorUrlData);
 
@@ -79,9 +77,7 @@ export default function VectorsGrid({
     );
   };
 
-  const handleGetSimilarVectors=async()=>{
-
-  }
+  const handleGetSimilarVectors = async () => {};
 
   const handleModalSize = () => {
     if (typeof window != "undefined") {
@@ -111,19 +107,20 @@ export default function VectorsGrid({
     };
   }, [modal.sizeModal]);
 
-  useEffect(() => {
-
-
-  }, [modal.vectorItem]);
+  useEffect(() => {}, [modal.vectorItem]);
 
   useEffect(() => {}, [likes]);
 
   return (
     <>
       <div className="items-start justify-between flex flex-row border border-green-500 relative ">
-        {filter.openFilter===true ? <VectorFilters />:(<></>)}
+        {filter.openFilter === true ? <VectorFilters /> : <></>}
         <div
-          className={` border border-red-500 grid grid-cols-2 w-full p-1  place-items-center place-content-evenly auto-rows-max justify-center items-center gap-2 ${filter.openFilter ? "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5":"md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6" }`}
+          className={` border border-red-500 grid grid-cols-2 w-full p-1  place-items-center place-content-evenly auto-rows-max justify-center items-center gap-2 ${
+            filter.openFilter
+              ? "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
+              : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
+          }`}
         >
           {vectorUrlData.map((item) => {
             return (
@@ -133,7 +130,7 @@ export default function VectorsGrid({
             );
           })}
         </div>
-      { sort.openSort ? <SortedBy />:(<></>)}
+        {sort.openSort ? <SortedBy /> : <></>}
       </div>
 
       <Modal
@@ -189,14 +186,16 @@ export default function VectorsGrid({
                       SVG&nbsp;
                       <FaArrowDownLong size={15} color="#FFFFFF" />
                     </Link>{" "}
-                    <Link
+                    <a
                       className="bg-[#0BAC6F] inline-flex items-center w-[30%]  justify-center p-1 rounded-full text-lg font-normal text-white"
-                      download
-                      href={"/"}
+                      download={
+                        modal.vectorItem ? modal.vectorItem.vector_id : "/"
+                      }
+                      href={modal.vectorItem ? modal.vectorItem.url : "/"}
                     >
                       JPEG&nbsp;
                       <FaArrowDownLong size={15} color="#FFFFFF" />
-                    </Link>{" "}
+                    </a>{" "}
                     <Link
                       className="bg-[#0BAC6F] inline-flex w-[30%] justify-center items-center p-1 rounded-full text-lg font-normal text-white"
                       href={"/"}
@@ -238,13 +237,12 @@ export default function VectorsGrid({
                 </div>
               </div>
             </div>
-            <RelatedTag/>
-          
-            <SimilarVectors/>
+            <RelatedTag />
+
+            <SimilarVectors />
           </div>
         </Modal.Body>
-        <ModalCloseButton/>
-  
+        <ModalCloseButton />
         <Button
           onClick={handleNextVector}
           variant={"default"}

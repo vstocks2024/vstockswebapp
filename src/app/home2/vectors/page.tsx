@@ -30,11 +30,15 @@ async function getVectorUrlData(
       cache: "no-store",
     }
   );
-
+  try{
   if (!res.ok) {
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
+}
+catch(error){
+  console.log("Exception Raised",error);
+}
 
   return res.json();
 }

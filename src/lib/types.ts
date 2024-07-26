@@ -42,3 +42,9 @@ export const Tags = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
 });
+
+
+export const Pages = z.object({
+  currentPage: z.number(),
+  totalPages: z.number(),
+});

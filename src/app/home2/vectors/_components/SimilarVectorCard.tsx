@@ -6,6 +6,7 @@ import { z } from 'zod';
 
 export default function SimilarVectorCard({card}:{card:z.infer<typeof Vector_Url>}) {
     const router=useRouter();
+    console.log(card);
   return (
     <>
     <button>

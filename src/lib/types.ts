@@ -10,7 +10,7 @@ export const Vector_Url = z.object({
   url: z.string(),
   width: z.number(),
   height: z.number(),
-  license: z.string(),
+  subscription_type: z.string(),
   orientation: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),

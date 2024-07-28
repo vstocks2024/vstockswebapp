@@ -25,7 +25,7 @@ export default function NavBar() {
   const router = useRouter();
   const user = useUser();
 
-  console.log(user);
+  // console.log(user);
 
   const isLoggedIn = () => {
     if (user && user?.id) {

@@ -8,14 +8,18 @@ import { TotalPages } from "@/lib/types";
 import PaginateVectorGridByCategory from "../../_components/PaginateVectorGridByCategory";
 
 async function getVectorByCatgeoryName(
-  categoryName: string,
-  currentPage: number
+  currentCategoryName: string,
+  currentPage: string,
+  currentLicense: string,
+  currentOrientation: string,
+  currentFormat: string,
+  currentSort: string
 ): Promise<z.infer<typeof Vector_Url>[]> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/vector_category/vectorlist/${categoryName}/${currentPage}`,
+    `${process.env.NEXT_PUBLIC_URL}/vector_category/vectorlist/${currentCategoryName}/${currentPage}/${currentLicense}/${currentOrientation}/${currentFormat}/${currentSort}`,
     {
       method: "GET",
-      cache:"no-store"
+      cache: "no-store",
     }
   );
   if (!res.ok) {
@@ -27,14 +31,17 @@ async function getVectorByCatgeoryName(
 }
 
 async function getTotalPages(
-  categoryName: string,
-  currentPage: number
+  currentCategoryName: string,
+  currentPage: string,
+  currentLicense: string,
+  currentOrientation: string,
+  currentFormat: string
 ): Promise<z.infer<typeof TotalPages>> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/vector_category/totalpages/${categoryName}/${currentPage}`,
+    `${process.env.NEXT_PUBLIC_URL}/vector_category/totalpages/${currentCategoryName}/${currentPage}/${currentLicense}/${currentOrientation}/${currentFormat}`,
     {
       method: "GET",
-      cache:"no-store"
+      cache: "no-store",
     }
   );
   if (!res.ok) {
@@ -50,15 +57,38 @@ export default async function VectorCategoryNamePage({
   searchParams,
 }: {
   params: { name: string };
-  searchParams: { page: number };
+  searchParams: {
+    page: string;
+    license: string;
+    orientation: string;
+    format: string;
+    sort: string;
+  };
 }) {
-  const currentPage = searchParams?.page || 1;
-  const categoryName= params?.name || "";
+  const currentCategoryName = params?.name || "";
+  const currentPage = searchParams?.page || "1";
+  const currentLicense = searchParams?.license || "all";
+  const currentOrientation = searchParams?.orientation || "all";
+  const currentFormat = searchParams?.format || "all";
+  const currentSort = searchParams?.sort || "relevance";
 
-  console.log(currentPage,categoryName);
-
-  const [vectorUrlData, totalVectorPages] = await Promise.all([await getVectorByCatgeoryName(categoryName,currentPage),await getTotalPages(categoryName,currentPage)]);
-
+  const [vectorUrlData, totalVectorPages] = await Promise.all([
+    await getVectorByCatgeoryName(
+      currentCategoryName,
+      currentPage,
+      currentLicense,
+      currentOrientation,
+      currentFormat,
+      currentSort
+    ),
+    await getTotalPages(
+      currentCategoryName,
+      currentPage,
+      currentLicense,
+      currentOrientation,
+      currentFormat
+    ),
+  ]);
 
   return (
     <>
@@ -69,7 +99,10 @@ export default async function VectorCategoryNamePage({
               <Tabs />
               <CombineFilters />
               <VectorsGrid vectorUrlData={vectorUrlData} />
-              <PaginateVectorGridByCategory category_name={categoryName} pages={totalVectorPages}/>
+              <PaginateVectorGridByCategory
+                category_name={currentCategoryName}
+                pages={totalVectorPages}
+              />
             </div>
           </div>
         </main>

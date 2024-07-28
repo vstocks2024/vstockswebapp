@@ -114,7 +114,7 @@ export default function VectorsGrid({
   return (
     <>
       <div className="items-start justify-between flex flex-row border border-green-500 relative ">
-        {filter.openFilter === true ? <VectorFilters /> : <></>}
+        {filter.openFilter === true ? <VectorFilters key={nanoid()} /> : <></>}
         <div
           className={` border border-red-500 grid grid-cols-2 w-full p-1  place-items-center place-content-evenly auto-rows-max justify-center items-center gap-2 ${
             filter.openFilter
@@ -142,7 +142,7 @@ export default function VectorsGrid({
         <Button
           onClick={handlePrevVector}
           variant={"default"}
-          className="absolute  bg-white bg-opacity-15 hover:bg-white hover:bg-opacity-30 top-1/2  -left-20 cursor-pointer rounded-full"
+          className="absolute  bg-white bg-opacity-15 hover:bg-white hover:bg-opacity-30 top-1/2  -left-20 cursor-pointer h-auto w-auto "
         >
           <ChevronLeft size={30} />
         </Button>
@@ -246,7 +246,7 @@ export default function VectorsGrid({
         <Button
           onClick={handleNextVector}
           variant={"default"}
-          className="absolute bg-white bg-opacity-15 hover:bg-white hover:bg-opacity-30 top-1/2 -right-20 cursor-pointer rounded-full"
+          className="absolute bg-white bg-opacity-15 hover:bg-white hover:bg-opacity-30 top-1/2 -right-20 cursor-pointer h-auto w-auto"
         >
           <ChevronRight size={30} />
         </Button>

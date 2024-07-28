@@ -19,18 +19,19 @@ async function getData(
     // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
-
-  return res.json();
+  const data1 = await res.json();
+  console.log(data1);
+  return data1;
 }
 
 export default function SimilarVectors() {
   const modal = useModal();
-  console.log("VectorItem:",modal.vectorItem);
+  console.log("VectorItem:", modal.vectorItem.vector_id);
   const [categoryArr, setCategoryArr] = useState<z.infer<typeof Vector_Url>[]>(
     []
   );
   const handleCategoryArr = async () => {
-    console.log(modal.vectorItem);
+    console.log("Inside handle Category Arr", modal.vectorItem);
     const data = await getData(modal.vectorItem.vector_id);
     console.log(data);
     setCategoryArr(data);

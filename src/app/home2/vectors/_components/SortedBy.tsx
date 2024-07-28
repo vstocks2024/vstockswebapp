@@ -1,6 +1,7 @@
 "use client"
 
 import { useSort } from "@/context/sort";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { MdCheck } from "react-icons/md";
 
@@ -9,38 +10,50 @@ export default function SortBy(){
      const [popular,setPopular]=useState(false);
      const [date,setDate]=useState(false);
      const [relevance,setRelevance]=useState(true);
+     const searchParams=useSearchParams();
+     const router=useRouter();
+     const pathname=usePathname();
+     const sp=new URLSearchParams(searchParams);
      const sortBy=useSort();
 
-     function handleAlpha(){
+     const handleAlpha=()=>{
       setAlpha(true);
       setPopular(false);
       setDate(false);
       setRelevance(false);
       sortBy.setSort("Alphabetically")
+      sp.set("sort","alpha")
+      router.push(`${pathname}/${sp.toString()}`)
 
      }
-     function handlePopular(){
+     const handlePopular=()=>{
       setAlpha(false);
       setPopular(true);
       setDate(false);
       setRelevance(false);
       sortBy.setSort("Most Popular")
+      sp.set("sort","popular")
+      router.push(`${pathname}/${sp.toString()}`)
 
      }
-     function handleDate(){
+     const  handleDate=()=>{
       setAlpha(false);
       setPopular(false);
       setDate(true);
       setRelevance(false);
       sortBy.setSort("Date")
+      sp.set("sort","date")
+      router.push(`${pathname}/${sp.toString()}`)
 
      }
-     function handleRelevance(){
+const handleRelevance=()=>{
       setAlpha(false);
       setPopular(false);
       setDate(false);
       setRelevance(true);
       sortBy.setSort("Most Relevant")
+      sp.set("sort","relevance")
+      router.push(`${pathname}/${sp.toString()}`)
 
      }
      

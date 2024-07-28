@@ -13,41 +13,52 @@ import CombineFilters from "./_components/CombineFilters";
 import { Vector_Url } from "@/lib/types";
 import { TotalPages } from "@/lib/types";
 
-
-
-
 const SearchParams = z.object({
-  page: z.number().optional(),
+  page: z.string().optional(),
+  license: z.string().optional(),
+  orientation: z.string().optional(),
+  format: z.string().optional(),
+  sort: z.string().optional(),
 });
 
 async function getVectorUrlData(
-  currentPage: number
+  currentPage: string,
+  currentLicense: string,
+  currentOrientation: string,
+  currentFormat: string,
+  currentSort: string
 ): Promise<z.infer<typeof Vector_Url>[]> {
+  console.log(currentPage);
+  console.log(currentLicense);
+  console.log(currentOrientation);
+  console.log(currentFormat);
+
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/vectors/list_vectors_url/${currentPage}`,
+    `${process.env.NEXT_PUBLIC_URL}/vectors/list_vectors_url/${currentPage}/${currentLicense}/${currentOrientation}/${currentFormat}/${currentSort}`,
     {
       method: "GET",
       cache: "no-store",
     }
   );
-  try{
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+  try {
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+  } catch (error) {
+    console.log("Exception Raised", error);
   }
-}
-catch(error){
-  console.log("Exception Raised",error);
-}
 
   return res.json();
 }
 
 async function getTotalVectorPages(
-  currentPage: number
+  currentPage: string,
+  currentLicense: string,
+  currentOrientation: string,
+  currentFormat: string
 ): Promise<z.infer<typeof TotalPages>> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/vectors/totalpages/${currentPage}`,
+    `${process.env.NEXT_PUBLIC_URL}/vectors/totalpages/${currentPage}/${currentLicense}/${currentOrientation}/${currentFormat}`,
     {
       method: "GET",
       cache: "no-store",
@@ -55,7 +66,6 @@ async function getTotalVectorPages(
   );
 
   if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
     throw new Error("Failed to fetch data");
   }
 
@@ -66,10 +76,25 @@ export default async function VectorsPage({
 }: {
   searchParams: z.infer<typeof SearchParams>;
 }) {
-  const currentPage = searchParams?.page || 1;
-  //console.log(currentPage);
-  const vectorWithUrlData = getVectorUrlData(currentPage);
-  const vectorPages = getTotalVectorPages(currentPage);
+  const currentPage = searchParams?.page || "1";
+  const currentLicense = searchParams?.license || "all";
+  const currentOrientation = searchParams?.orientation || "all";
+  const currentFormat = searchParams?.format || "all";
+  const currentSort = searchParams?.sort || "relevance";
+
+  const vectorWithUrlData = getVectorUrlData(
+    currentPage,
+    currentLicense,
+    currentOrientation,
+    currentFormat,
+    currentSort
+  );
+  const vectorPages = getTotalVectorPages(
+    currentPage,
+    currentLicense,
+    currentOrientation,
+    currentFormat
+  );
 
   const [vectorUrlData, totalVectorPages] = await Promise.all([
     vectorWithUrlData,

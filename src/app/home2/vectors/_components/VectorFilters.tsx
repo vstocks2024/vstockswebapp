@@ -8,14 +8,81 @@ import { CiFileOn } from "react-icons/ci";
 import { IoColorPaletteOutline } from "react-icons/io5";
 import { useState } from "react";
 import { useFilter } from "@/context/filter";
+import Link from "next/link";
+import {
+  useParams,
+  usePathname,
+  useRouter,
+  useSearchParams,
+} from "next/navigation";
 export default function VectorFilters() {
-  const filter=useFilter();
+  const filter = useFilter();
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+  const currentPage = searchParams.get("page") ?? "1";
+  const license=searchParams.get("license") ?? "all";
+
+
+  const params = useParams<{ name: string }>();
+
+  const handleLicenseFree = () => {
+    const sp = new URLSearchParams(searchParams);
+    sp.set("license", "free");
+    router.push(`${pathname}?${sp.toString()}`);
+  };
+
+  const handleLicensePremium = () => {
+    const sp = new URLSearchParams(searchParams);
+    sp.set("license", "premium");
+    router.push(`${pathname}?${sp.toString()}`);
+  };
+  const handleOrientationSquare = () => {
+    const sp = new URLSearchParams(searchParams);
+    sp.set("orientation", "square");
+    router.push(`${pathname}?${sp.toString()}`);
+  };
+  const handleOrientationHorizontal = () => {
+    const sp = new URLSearchParams(searchParams);
+    sp.set("orientation", "horizontal");
+    router.push(`${pathname}?${sp.toString()}`);
+  };
+  const handleOrientationVertical = () => {
+    const sp = new URLSearchParams(searchParams);
+    sp.set("orientation", "vertical");
+    router.push(`${pathname}?${sp.toString()}`);
+  };
+  const handlFileTypeVector = () => {
+    const sp = new URLSearchParams(searchParams);
+    sp.set("format", "all");
+    router.push(`${pathname}?${sp.toString()}`);
+  };
+  const handlFileTypeSVG = () => {
+    const sp = new URLSearchParams(searchParams);
+    sp.set("format", "svg");
+    router.push(`${pathname}?${sp.toString()}`);
+  };
+  const handlFileTypeAI = () => {
+    const sp = new URLSearchParams(searchParams);
+    sp.set("format", "ai");
+    router.push(`${pathname}?${sp.toString()}`);
+  };
+  const handlFileTypeJPEG = () => {
+    const sp = new URLSearchParams(searchParams);
+    sp.set("format", "jpeg");
+    router.push(`${pathname}?${sp.toString()}`);
+  };
+
   return (
     <>
-      <div className={`border rounded-r-xl p-1 left-0 shadow-xl mr-2 top-0 w-full h-full z-10 md:relative md:max-w-[30%] md:z-0 md:top-0 md:left-0 bg-white flex flex-col ${filter.openFilter===true ? "flex":"hidden"} `}>
+      <div
+        className={`border rounded-r-xl p-1 left-0 shadow-xl mr-2 top-0 w-full h-full z-10 md:relative md:max-w-[30%] md:z-0 md:top-0 md:left-0 bg-white flex flex-col ${
+          filter.openFilter === true ? "flex" : "hidden"
+        } `}
+      >
         <div className="flex flex-row md:hidden">
           <div className="flex items-center w-1/2">
-            <button onClick={()=>filter.setOPenFilter(!filter.openFilter)}>
+            <button onClick={() => filter.setOPenFilter(!filter.openFilter)}>
               <MdClose size={22} />
             </button>
             &nbsp;&nbsp;
@@ -33,12 +100,18 @@ export default function VectorFilters() {
             &nbsp;&nbsp;<span className=" text-lg font-semibold">License</span>
           </div>
           <div className="flex gap-4">
-            <button className="border hover:text-white hover:border-white hover:bg-[#2E67DD] border-black p-1 rounded-lg">
+            <button
+              onClick={handleLicenseFree}
+              className="border  hover:text-white hover:border-white hover:bg-[#2E67DD] border-black px-2 py-1 rounded-lg"
+            >
               Free
             </button>
-            <button className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center border-black border p-1 text-lg rounded-lg">
+            <button
+              onClick={handleLicensePremium}
+              className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center border-black border px-2 py-1 text-lg rounded-lg"
+            >
               <FaCrown size={18} />
-              &nbsp;&nbsp;<span className="">Premium</span>
+              &nbsp;<span className="">Premium</span>
             </button>
           </div>
         </div>
@@ -51,16 +124,25 @@ export default function VectorFilters() {
             <span className="text-lg font-semibold">Orientation</span>
           </div>
           <div className="flex flex-col gap-2">
-            <button className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg">
+            <button
+              onClick={handleOrientationHorizontal}
+              className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg"
+            >
               <h4 className="text-base">Horizontal</h4>&nbsp;
               <LuRectangleHorizontal size={18} />
             </button>
             <div className="flex flex-row gap-2">
-              <button className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg">
+              <button
+                onClick={handleOrientationVertical}
+                className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg"
+              >
                 <h4 className="text-base">Vertical</h4>&nbsp;
                 <LuRectangleVertical size={18} />
               </button>
-              <button className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg">
+              <button
+                onClick={handleOrientationSquare}
+                className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg"
+              >
                 <h4 className="text-base">Square</h4>&nbsp;
                 <LuSquare size={18} />
               </button>
@@ -73,17 +155,29 @@ export default function VectorFilters() {
             &nbsp;&nbsp;<h4 className="text-lg font-semibold">File Type</h4>
           </div>
           <div className="grid grid-cols-2 gap-2">
-            <button className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black">
+            <button
+              onClick={handlFileTypeVector}
+              className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black"
+            >
               Vector
             </button>
-            <button className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black">
-              Psd
+            <button
+              onClick={handlFileTypeJPEG}
+              className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black"
+            >
+              JPEG
             </button>
-            <button className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black">
-              Svg
+            <button
+              onClick={handlFileTypeSVG}
+              className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black"
+            >
+              SVG
             </button>
-            <button className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black">
-              Ai
+            <button
+              onClick={handlFileTypeAI}
+              className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black"
+            >
+              AI
             </button>
           </div>
         </div>
@@ -109,4 +203,3 @@ export default function VectorFilters() {
     </>
   );
 }
-

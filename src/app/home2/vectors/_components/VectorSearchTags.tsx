@@ -6,7 +6,7 @@ import { nanoid } from "nanoid";
 
 
 async function getRandomVectorTagData():Promise<z.infer<typeof Tags>[]> {
-  const res = await fetch(`${process.env.PUBLIC_NEXT_URL}/`,{
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/tags/randomtags`,{
     method:"GET",
     cache:"no-store"
   });

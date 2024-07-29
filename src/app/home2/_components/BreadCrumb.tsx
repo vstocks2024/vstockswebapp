@@ -14,17 +14,17 @@ export default function BreadCrumb() {
     const arr=pathname.split("/");
     let crumbs:z.infer<typeof CRUMB>[]=[];
     arr.forEach((ele)=>{
-        crumbs=[...crumbs,{id:nanoid(),name:ele}]
+      if(ele) crumbs=[...crumbs,{id:nanoid(),name:ele}];
     })
+    console.log(crumbs);
   return (
     <>  <div className="mx-1 px-1">
-    <div className="mx-16 my-1 p-1 inline-flex flex-row text-white items-center justify-start gap-x-1">
-      <FiHome color="#FFF" size={15}/>
-      <h5 className="text-[16px] font-poppins600 font-medium not-italic">Home</h5>
+    <div className="mx-16 my-1 p-1 inline-flex flex-row text-white items-center justify-start  gap-x-0.5">
+      
       {
       crumbs && crumbs.map((crumb)=>{
-       return (<Fragment key={crumb.id}><MdKeyboardArrowRight color="#FFF" size={20}/>
-       <h5 className="text-[16px] font-poppins600 font-medium not-italic">{crumb.name}</h5></Fragment>)
+       return (crumb.name==="home2" ?<Fragment key={crumb.id}><FiHome color="#FFF" size={15}/>&nbsp;<h5 className="text-[16px] font-poppins600 font-medium not-italic">Home2</h5></Fragment>:<Fragment key={crumb.id}><MdKeyboardArrowRight color="#FFF" size={20}/>
+       <h5 className="text-[16px] font-poppins600 font-medium not-italic">{crumb.name[0]?.toUpperCase()+crumb.name.slice(1)}</h5></Fragment>)
        })
        }
     </div>

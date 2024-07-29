@@ -1,40 +1,49 @@
 "use client";
 import Link from "next/link";
-import { useState } from "react";
+import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { BiLoaderCircle } from "react-icons/bi";
 import { useDebouncedCallback } from "use-debounce";
 import axios from "axios";
+import { Vector_Url } from "@/lib/types";
+import { z } from "zod";
+import { nanoid } from "nanoid";
 
 export default function VectorSearchInput() {
-  const [items, setItems] = useState([]);
+  const [items, setItems] = useState<z.infer<typeof Vector_Url>[]>([]);
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
-  const handleSearchVectors = useDebouncedCallback(async (event) => {
-    if (event.target.value === "") {
-      setItems([]);
-      return;
-    }
-
-    setIsSearching(true);
-    try {
-      const response = await axios.get(
-        `${process.env.NEXT_PUBLIC_URL}/images/search_vectors/${event.target.value}`
-      );
-
-      const result = response.data.data;
-      console.log(result);
-      if (result) {
-        setItems(result);
-        setIsSearching(false);
+  const handleSearchVectors = useDebouncedCallback(
+    async (event: ChangeEvent<HTMLInputElement>) => {
+      if (event.target.value === "") {
+        setItems([]);
         return;
       }
-      setItems([]);
-      setIsSearching(false);
-    } catch (error) {
-      console.log(error);
-      alert(error);
-    }
-  }, 300);
+
+      setIsSearching(true);
+      try {
+        const response = await axios.get(
+          `${process.env.NEXT_PUBLIC_URL}/vectors_url/searchvectorname/${event.target.value}`
+        );
+
+        const result = response.data;
+        console.log(result);
+        if (result) {
+          setItems(result);
+          setIsSearching(false);
+          return;
+        }
+        setItems([]);
+        setIsSearching(false);
+      } catch (error) {
+        console.log(error);
+        alert(error);
+      }
+    },
+    300
+  );
+
+  useEffect(() => {}, [items]);
+
   return (
     <>
       <div className="relative m-1 p-1 w-[76%] max-w-[800px] inline-flex items-center justify-center">
@@ -70,28 +79,21 @@ export default function VectorSearchInput() {
           </button>
         )}
         {items.length > 0 ? (
-          <div className="absolute bg-white w-[90%] rounded-b-md  h-auto  z-20  top-12   m-1 p-1">
-            {items.map(
-              (
-                item: {
-                  id: string;
-                  image_name: string;
-                  createdAt: Date;
-                  updatedAt: Date;
-                },
-                oa,
-                ind
-              ) => (
-                <div className="p-1" key={`${item?.id}_${ind}`}>
-                  <Link
-                    href={`/editor/${item?.id}`}
-                    className="flex items-center justify-between w-full cursor-pointer hover:bg-gray-200 p-1 px-2"
-                  >
-                    <span className="">{item?.image_name.split(".")[0]}</span>
-                  </Link>
-                </div>
-              )
-            )}
+          <div className="absolute bg-white w-[90%] rounded-b-md  h-[300px]   z-20  top-12   m-1 p-1">
+            {items.map((item) => {
+              return (
+                <>
+                  <div className="p-1" key={nanoid()}>
+                    <Link
+                      href={`/editor/${item.vector_id}`}
+                      className="flex items-center justify-between w-full cursor-pointer hover:bg-gray-200 p-1 px-2"
+                    >
+                      <span className="">{item.name}</span>
+                    </Link>
+                  </div>{" "}
+                </>
+              );
+            })}
           </div>
         ) : null}
       </div>

@@ -1,4 +1,4 @@
-import MainLayout from "@/components/layouts/MainLayout";
+
 import Image from "next/image";
 
 import { z } from "zod";
@@ -12,6 +12,7 @@ import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import CombineFilters from "./_components/CombineFilters";
 import { Vector_Url } from "@/lib/types";
 import { TotalPages } from "@/lib/types";
+import MainLayout from "./_components/layout/MainLayout";
 
 const SearchParams = z.object({
   page: z.string().optional(),

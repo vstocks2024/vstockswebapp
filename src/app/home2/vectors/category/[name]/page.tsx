@@ -1,4 +1,4 @@
-import MainLayout from "@/components/layouts/MainLayout";
+
 import { z } from "zod";
 import CombineFilters from "../../_components/CombineFilters";
 import Tabs from "@/app/home2/_components/Tabs";
@@ -6,6 +6,7 @@ import { Vector_Url } from "@/lib/types";
 import VectorsGrid from "../../_components/VectorsGrid";
 import { TotalPages } from "@/lib/types";
 import PaginateVectorGrid from "../../_components/PaginateVectorGrid";
+import MainLayout from "../../_components/layout/MainLayout";
 
 async function getVectorByCatgeoryName(
   currentCategoryName: string,

@@ -7,7 +7,7 @@ export default function VectorTagButton({tag}:{tag:z.infer<typeof Tags>}) {
   <>
    <button className=" px-3 py-2 inline-flex flex-row items-center  justify-around rounded-[75.2px] bg-mycolor2 text-white border-white   border-solid gap-x-2">
             <h3 className="text-[12px]  font-poppins text-nowrap ">
-              Dusshera Vectors
+              {tag.name}
             </h3>
             <span className="">
               <svg

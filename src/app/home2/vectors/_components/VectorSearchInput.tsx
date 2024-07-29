@@ -79,7 +79,7 @@ export default function VectorSearchInput() {
           </button>
         )}
         {items.length > 0 ? (
-          <div className="absolute bg-white w-[90%] rounded-b-md  h-[300px]   z-20  top-12   m-1 p-1">
+          <div className="absolute bg-white w-[90%] rounded-b-lg  h-[200px] overflow-y-auto  z-20  top-12   m-1 p-1">
             {items.map((item) => {
               return (
                 <>

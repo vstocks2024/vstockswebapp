@@ -77,6 +77,7 @@ export default function TemplatesDropDownCard() {
                 >
                   <Link
                     href={`/home2/vectors/category/${item.name}?page=1`}
+                   scroll={false}
                   >
                     <h1 className=" hover:underline text-black font-poppins400 text-[16px] font-medium">
                       {item.name}

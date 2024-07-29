@@ -22,7 +22,7 @@ export default function PaginateVectorGridByCategory({
   console.log(pages);
   return (
     <>
-      <div className="border border-green-500 ">
+      <div className="my-10">
         <Pagination>
           <PaginationContent>
             <PaginationItem>

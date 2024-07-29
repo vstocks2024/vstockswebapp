@@ -12,7 +12,7 @@ export default function CombineFilters() {
   const filter=useFilter();
   return (
     <>
-      <div className="flex flex-row   items-center   justify-between relative  border border-green-400">
+      <div className="flex flex-row  items-center  justify-between relative py-10">
         <div className="inline-flex flex-row items-center justify-between">
           <span className="px-1 py-2 cursor-pointer">
             <BsSliders size={20} />

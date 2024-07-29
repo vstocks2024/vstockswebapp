@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { Suspense, useEffect } from "react";
 import { z } from "zod";
 import VectorCard from "./VectorCard";
 import { nanoid } from "nanoid";
@@ -27,6 +27,8 @@ import { Vector_Url } from "@/lib/types";
 import SimilarVectors from "./SimilarVectors";
 import ModalCloseButton from "./ModalCloseButton";
 import RelatedTag from "./RelatedTag";
+import { Skeleton } from "@/components/ui/skeleton"
+
 
 export default function VectorsGrid({
   vectorUrlData,
@@ -113,10 +115,10 @@ export default function VectorsGrid({
 
   return (
     <>
-      <div className="items-start justify-between flex flex-row border border-green-500 relative ">
+      <div className="items-start justify-between flex flex-row relative ">
         {filter.openFilter === true ? <VectorFilters key={nanoid()} /> : <></>}
         <div
-          className={` border border-red-500 grid grid-cols-2 w-full p-1  place-items-center place-content-evenly auto-rows-max justify-center items-center gap-2 ${
+          className={`grid grid-cols-2 w-full p-1  place-items-center place-content-evenly auto-rows-max justify-center items-center gap-2 ${
             filter.openFilter
               ? "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
               : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
@@ -125,8 +127,11 @@ export default function VectorsGrid({
           {vectorUrlData.map((item) => {
             return (
               <>
+              <Suspense fallback={<Skeleton className="w-[100px] h-[20px] rounded" />}>
                 <VectorCard key={nanoid()} item={item} />
+                </Suspense>
               </>
+
             );
           })}
         </div>
@@ -159,7 +164,7 @@ export default function VectorsGrid({
                 </Link>
                 <div
                   className="
-                             absolute inline-block top-[15%] right-[10%] items-center justify-center space-y-1 lg:hidden"
+                             absolute inline-block -translate-x-[10%] -translate-y-[15%] top-[15%] right-[10%] items-center justify-center space-y-1 lg:hidden"
                 >
                   <FaHeart className="cursor-pointer" size={30} />
                   <PiShareFatFill size={30} />

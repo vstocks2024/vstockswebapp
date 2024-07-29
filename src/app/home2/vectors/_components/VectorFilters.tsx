@@ -6,71 +6,93 @@ import { LuSquare } from "react-icons/lu";
 import { LuRectangleVertical } from "react-icons/lu";
 import { CiFileOn } from "react-icons/ci";
 import { IoColorPaletteOutline } from "react-icons/io5";
-import { useState } from "react";
+
 import { useFilter } from "@/context/filter";
-import Link from "next/link";
-import {
-  useParams,
-  usePathname,
-  useRouter,
-  useSearchParams,
-} from "next/navigation";
+
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 export default function VectorFilters() {
   const filter = useFilter();
   const router = useRouter();
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const currentPage = searchParams.get("page") ?? "1";
-  const license=searchParams.get("license") ?? "all";
-
-
-  const params = useParams<{ name: string }>();
+  const sp = new URLSearchParams(searchParams);
 
   const handleLicenseFree = () => {
-    const sp = new URLSearchParams(searchParams);
-    sp.set("license", "free");
-    router.push(`${pathname}?${sp.toString()}`);
+    if (sp.get("license") === "free") {
+      sp.set("license", "all");
+    } else {
+      sp.set("license", "free");
+    }
+    sp.set("page", "1");
+    router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
 
   const handleLicensePremium = () => {
-    const sp = new URLSearchParams(searchParams);
-    sp.set("license", "premium");
-    router.push(`${pathname}?${sp.toString()}`);
+    if (sp.get("license") === "premium") {
+      sp.set("license", "all");
+    } else {
+      sp.set("license", "premium");
+    }
+    sp.set("page", "1");
+    router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
   const handleOrientationSquare = () => {
-    const sp = new URLSearchParams(searchParams);
-    sp.set("orientation", "square");
-    router.push(`${pathname}?${sp.toString()}`);
+    if (sp.get("orientation") === "square") {
+      sp.set("orientation", "all");
+    } else {
+      sp.set("orientation", "square");
+    }
+    sp.set("page", "1");
+    router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
   const handleOrientationHorizontal = () => {
-    const sp = new URLSearchParams(searchParams);
-    sp.set("orientation", "horizontal");
-    router.push(`${pathname}?${sp.toString()}`);
+    if (sp.get("orientation") === "horizontal") {
+      sp.set("orientation", "all");
+    } else {
+      sp.set("orientation", "horizontal");
+    }
+    sp.set("page", "1");
+    router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
   const handleOrientationVertical = () => {
-    const sp = new URLSearchParams(searchParams);
-    sp.set("orientation", "vertical");
-    router.push(`${pathname}?${sp.toString()}`);
+    if (sp.get("orientation") === "vertcial") {
+      sp.set("orientation", "all");
+    } else {
+      sp.set("orientation", "vertical");
+    }
+    sp.set("page", "1");
+    router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
   const handlFileTypeVector = () => {
-    const sp = new URLSearchParams(searchParams);
     sp.set("format", "all");
-    router.push(`${pathname}?${sp.toString()}`);
+    router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
   const handlFileTypeSVG = () => {
-    const sp = new URLSearchParams(searchParams);
-    sp.set("format", "svg");
-    router.push(`${pathname}?${sp.toString()}`);
+    if (sp.get("format") === "svg") {
+      sp.set("format", "all");
+    } else {
+      sp.set("format", "svg");
+    }
+    sp.set("page", "1");
+    router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
   const handlFileTypeAI = () => {
-    const sp = new URLSearchParams(searchParams);
-    sp.set("format", "ai");
-    router.push(`${pathname}?${sp.toString()}`);
+    if (sp.get("format") === "ai") {
+      sp.set("format", "all");
+    } else {
+      sp.set("format", "ai");
+    }
+    sp.set("page", "1");
+    router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
   const handlFileTypeJPEG = () => {
-    const sp = new URLSearchParams(searchParams);
-    sp.set("format", "jpeg");
-    router.push(`${pathname}?${sp.toString()}`);
+    if (sp.get("format") === "jpeg") {
+      sp.set("format", "all");
+    } else {
+      sp.set("format", "jpeg");
+    }
+    sp.set("page", "1");
+    router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
 
   return (
@@ -102,13 +124,21 @@ export default function VectorFilters() {
           <div className="flex gap-4">
             <button
               onClick={handleLicenseFree}
-              className="border  hover:text-white hover:border-white hover:bg-[#2E67DD] border-black px-2 py-1 rounded-lg"
+              className={`${
+                sp.get("license") === "free"
+                  ? "bg-[#2E67DD] text-white border-none"
+                  : "bg-white"
+              } border  hover:text-white hover:border-white hover:bg-[#2E67DD] border-black px-2 py-1 rounded-lg`}
             >
               Free
             </button>
             <button
               onClick={handleLicensePremium}
-              className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center border-black border px-2 py-1 text-lg rounded-lg"
+              className={`${
+                sp.get("license") === "premium"
+                  ? "bg-[#2E67DD] text-white border-none"
+                  : "bg-white"
+              } flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center border-black border px-2 py-1 text-lg rounded-lg`}
             >
               <FaCrown size={18} />
               &nbsp;<span className="">Premium</span>
@@ -126,7 +156,11 @@ export default function VectorFilters() {
           <div className="flex flex-col gap-2">
             <button
               onClick={handleOrientationHorizontal}
-              className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg"
+              className={`${
+                sp.get("orientation") === "horizontal"
+                  ? "bg-[#2E67DD] text-white border-none"
+                  : "bg-white"
+              } flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg`}
             >
               <h4 className="text-base">Horizontal</h4>&nbsp;
               <LuRectangleHorizontal size={18} />
@@ -134,14 +168,22 @@ export default function VectorFilters() {
             <div className="flex flex-row gap-2">
               <button
                 onClick={handleOrientationVertical}
-                className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg"
+                className={`${
+                  sp.get("orientation") === "vertical"
+                    ? "bg-[#2E67DD] text-white border-none"
+                    : "bg-white"
+                } flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg`}
               >
                 <h4 className="text-base">Vertical</h4>&nbsp;
                 <LuRectangleVertical size={18} />
               </button>
               <button
                 onClick={handleOrientationSquare}
-                className="flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg"
+                className={` ${
+                  sp.get("orientation") === "square"
+                    ? "bg-[#2E67DD] text-white border-none"
+                    : "bg-white"
+                } flex hover:text-white hover:border-white hover:bg-[#2E67DD] items-center p-1 border-black border w-fit rounded-lg`}
               >
                 <h4 className="text-base">Square</h4>&nbsp;
                 <LuSquare size={18} />
@@ -157,25 +199,41 @@ export default function VectorFilters() {
           <div className="grid grid-cols-2 gap-2">
             <button
               onClick={handlFileTypeVector}
-              className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black"
+              className={`${
+                sp.get("format") === "all"
+                  ? "bg-[#2E67DD] text-white border-none"
+                  : "bg-white"
+              }  hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black`}
             >
               Vector
             </button>
             <button
               onClick={handlFileTypeJPEG}
-              className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black"
+              className={`${
+                sp.get("format") === "jpeg"
+                  ? "bg-[#2E67DD] text-white border-none"
+                  : "bg-white"
+              } hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black`}
             >
               JPEG
             </button>
             <button
               onClick={handlFileTypeSVG}
-              className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black"
+              className={`${
+                sp.get("format") === "svg"
+                  ? "bg-[#2E67DD] text-white border-none"
+                  : "bg-white"
+              } hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black`}
             >
               SVG
             </button>
             <button
               onClick={handlFileTypeAI}
-              className=" hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black"
+              className={`${
+                sp.get("format") === "ai"
+                  ? "bg-[#2E67DD] text-white border-none"
+                  : "bg-white"
+              } hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black`}
             >
               AI
             </button>

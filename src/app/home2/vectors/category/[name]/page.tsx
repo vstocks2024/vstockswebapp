@@ -5,7 +5,7 @@ import Tabs from "@/app/home2/_components/Tabs";
 import { Vector_Url } from "@/lib/types";
 import VectorsGrid from "../../_components/VectorsGrid";
 import { TotalPages } from "@/lib/types";
-import PaginateVectorGridByCategory from "../../_components/PaginateVectorGridByCategory";
+import PaginateVectorGrid from "../../_components/PaginateVectorGrid";
 
 async function getVectorByCatgeoryName(
   currentCategoryName: string,
@@ -99,10 +99,7 @@ export default async function VectorCategoryNamePage({
               <Tabs />
               <CombineFilters />
               <VectorsGrid vectorUrlData={vectorUrlData} />
-              <PaginateVectorGridByCategory
-                category_name={currentCategoryName}
-                pages={totalVectorPages}
-              />
+              <PaginateVectorGrid pages={totalVectorPages} />
             </div>
           </div>
         </main>

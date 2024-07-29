@@ -15,6 +15,7 @@ export default function SortBy(){
      const pathname=usePathname();
      const sp=new URLSearchParams(searchParams);
      const sortBy=useSort();
+     
 
      const handleAlpha=()=>{
       setAlpha(true);
@@ -23,7 +24,7 @@ export default function SortBy(){
       setRelevance(false);
       sortBy.setSort("Alphabetically")
       sp.set("sort","alpha")
-      router.push(`${pathname}/${sp.toString()}`)
+      router.push(`${pathname}?${sp.toString()}`)
 
      }
      const handlePopular=()=>{
@@ -33,7 +34,7 @@ export default function SortBy(){
       setRelevance(false);
       sortBy.setSort("Most Popular")
       sp.set("sort","popular")
-      router.push(`${pathname}/${sp.toString()}`)
+      router.push(`${pathname}?${sp.toString()}`)
 
      }
      const  handleDate=()=>{
@@ -43,7 +44,7 @@ export default function SortBy(){
       setRelevance(false);
       sortBy.setSort("Date")
       sp.set("sort","date")
-      router.push(`${pathname}/${sp.toString()}`)
+      router.push(`${pathname}?${sp.toString()}`)
 
      }
 const handleRelevance=()=>{
@@ -53,7 +54,7 @@ const handleRelevance=()=>{
       setRelevance(true);
       sortBy.setSort("Most Relevant")
       sp.set("sort","relevance")
-      router.push(`${pathname}/${sp.toString()}`)
+      router.push(`${pathname}?${sp.toString()}`)
 
      }
      

@@ -48,3 +48,12 @@ export const Pages = z.object({
   currentPage: z.number(),
   totalPages: z.number(),
 });
+
+
+export const CRUMB=z.object({
+  id : z.string(),
+  name:z.string()
+
+})
+
+

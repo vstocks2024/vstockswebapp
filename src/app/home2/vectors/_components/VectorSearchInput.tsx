@@ -5,7 +5,7 @@ import { BiLoaderCircle } from "react-icons/bi";
 import { useDebouncedCallback } from "use-debounce";
 import axios from "axios";
 
-export default function SearchInput() {
+export default function VectorSearchInput() {
   const [items, setItems] = useState([]);
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
@@ -40,7 +40,7 @@ export default function SearchInput() {
       <div className="relative m-1 p-1 w-[76%] max-w-[800px] inline-flex items-center justify-center">
         <input
           type="text"
-          placeholder={"placeholder"}
+          placeholder={"Vectors"}
           onChange={handleSearchVectors}
           className="rounded-[77px] capitalize  text-white text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] flex-shrink-0  w-full h-12 py-[16px] px-[29px]  outline-none focus:outline-none placeholder:font-poppins400   font-poppins400  font-extralight placeholder:font-extralight  placeholder:text-white not-italic  bg-mycolor1"
         />

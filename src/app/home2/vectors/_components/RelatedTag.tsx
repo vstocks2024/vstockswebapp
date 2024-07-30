@@ -34,12 +34,12 @@ export default function RelatedTag() {
   }, [modal.vectorItem]);
   return (
     <>
-      <div className="border border-blue-500 m-0.5 flex flex-col">
-        <div className="border border-red-500 m-0.5 ">
-          <h6 className="text-[10px] m-0.5  font-semibold border border-black">
+      <div className=" m-0.5 flex flex-col">
+        <div className=" m-0.5 ">
+          <h6 className="text-[14px] m-0.5  font-semibold ">
             Related Tags
           </h6>
-          <div className="border border-black   inline-flex  space-x-2 flex-row ">
+          <div className="inline-flex  space-x-2 flex-row ">
             {
               tagsArr && tagsArr.map((item)=>{
                     return <TagButton key={nanoid()} tag={item}/>

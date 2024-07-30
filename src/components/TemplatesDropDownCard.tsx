@@ -65,7 +65,7 @@ export default function TemplatesDropDownCard() {
   }, []);
   return (
     <>
-      <div className="absolute delay-200  transition  ease-in-out  top-[70px] p-8 h-[300px] z-20 bg-white w-[720px] -left-[200px] shadow-templatedropdown rounded-[25px] border-solid border border-black">
+      <div className="absolute delay-200  transition  ease-in-out  top-[70px] p-8 h-[360px]  z-20 bg-white w-[860px] -left-[200px] shadow-templatedropdown rounded-[25px] border-solid border border-black">
         <div className=""></div>
         <div className=" h-full grid gap-1 grid-cols-4 px-4 py-2 items-start justify-between">
           {categoryData.map((item) => {

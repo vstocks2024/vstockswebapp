@@ -23,11 +23,11 @@ export default function SimilarVectors() {
     
   }, [modal.vectorItem]);
   return (
-    <div className="border border-red-500 m-0.5">
-      <h4 className="text-[10px] border border-green-500 m-0.5 font-semibold">
+    <div className=" m-0.5">
+      <h4 className="text-[14px] m-0.5 font-semibold">
         More like this
       </h4>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 border  gap-2 m-0.5 p-0.5 border-black ">
+      <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-5 xl:grid-cols-6 border  gap-2 m-0.5 p-0.5 ">
         {categoryArr &&
           categoryArr.map((item) => {
             return (

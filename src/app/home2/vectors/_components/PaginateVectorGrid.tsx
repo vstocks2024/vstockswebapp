@@ -51,10 +51,9 @@ export default function PaginateVectorGrid({
   return (
     <>
       <div className="py-10">
-        <Pagination>
+        <Pagination className="cursor-pointer">
           {pages && pages.totalPages > 4 ? (
             <>
-              {" "}
               <PaginationContent className="cursor-pointer">
                 <PaginationItem>
                   <PaginationPrevious

@@ -152,37 +152,36 @@ export default function VectorsGrid({
           <ChevronLeft size={30} />
         </Button>
         <Modal.Body>
-          <div className="border border-green-500 m-0.5  flex flex-col">
-            <div className="border border-blue-500 m-0.5  justify-start items-start flex flex-col  lg:flex-row">
-              <div className="relative border border-amber-500 m-0.5   flex flex-col items-center justify-center  w-full  lg:w-[50%]">
+          <div className="m-0.5  flex flex-col">
+            <div className=" m-0.5  justify-start items-start flex flex-col  lg:flex-row">
+              <div className="relative  m-0.5   flex flex-col items-center justify-center  w-full  lg:w-[50%]">
                 <Link className="cursor-pointer" href={"/"}>
                   <img
-                    className="border cursor-pointer rounded-md w-[350px] h-[350px] md:w-[375px] md:h-[375px] xl:w-[400px] xl:h-[400px] border-black"
+                    className="cursor-pointer rounded-md w-[350px] h-[350px] md:w-[375px] md:h-[375px] xl:w-[400px] xl:h-[400px]"
                     alt=""
                     src={modal.vectorItem ? modal.vectorItem.url : ""}
                   />
                 </Link>
                 <div
-                  className="
-                             absolute inline-block -translate-x-[10%] -translate-y-[15%] top-[15%] right-[10%] items-center justify-center space-y-1 lg:hidden"
+                  className="absolute inline-block -translate-x-[10%] -translate-y-[15%] top-[15%] right-[10%] items-center justify-center space-y-1 lg:hidden"
                 >
                   <FaHeart className="cursor-pointer" size={30} />
                   <PiShareFatFill size={30} />
                 </div>
               </div>
-              <div className="relative hidden lg:flex lg:flex-col  border border-amber-500 m-0.5  lg:h-auto lg:w-[50%]">
-                <div className="border  border-black m-0.5 p-1 ">
+              <div className="relative hidden lg:flex lg:flex-col m-0.5  lg:h-auto lg:w-[50%]">
+                <div className=" m-0.5 p-1 ">
                   <h3 className="text-lg font-bold">Description</h3>
                   <p className="text-sm font-normal text-wrap">
                     {modal.vectorItem ? modal.vectorItem.description : ""}
                   </p>
                 </div>
-                <div className="border border-black m-0.5 p-1 h-auto hidden lg:flex lg:flex-col items-center space-y-1">
-                  <p className="text-base font-semibold border border-blue-600 m-0.5 p-1">
+                <div className="m-0.5 p-1 h-auto hidden lg:flex lg:flex-col items-center space-y-1">
+                  <p className="text-base font-semibold  m-0.5 p-1">
                     Download or edit in your computer as
                   </p>
 
-                  <div className="inline-flex w-full items-center justify-around border border-red-600 m-0.5 p-1">
+                  <div className="inline-flex w-full items-center justify-around  m-0.5 p-1">
                     <Link
                       className="bg-[#0BAC6F] inline-flex items-center justify-center w-[30%] p-1 rounded-full text-lg font-normal text-white"
                       download
@@ -210,30 +209,30 @@ export default function VectorsGrid({
                     </Link>
                   </div>
                 </div>
-                <div className=" hidden lg:flex lg:flex-col bg-[#F3F3F3] h-auto border border-black  items-center space-y-1 px-3 py-1">
-                  <p className="text-lg font-normal border m-0.5 border-green-400">
+                <div className=" hidden lg:flex lg:flex-col bg-[#F3F3F3] h-auto   items-center space-y-1 px-3 py-1">
+                  <p className="text-lg font-normal m-0.5">
                     OR
                   </p>
-                  <div className=" inline-flex flex-row items-center w-full justify-around border border-black m-0.5 p-1">
-                    <button className="rounded-full  p-2 text-base w-1/2 text-white border border-red-600  m-0.5 bg-[#0B85AC]">
+                  <div className=" inline-flex flex-row items-center w-full justify-around m-0.5 p-1">
+                    <button className="rounded-full  p-2 text-base w-1/2 text-white   m-0.5 bg-[#0B85AC]">
                       Edit Online
                     </button>
-                    <button className="rounded-full  p-2 text-base w-1/2 text-white border border-red-600  m-0.5 bg-[#0B85AC]">
+                    <button className="rounded-full  p-2 text-base w-1/2 text-white  m-0.5 bg-[#0B85AC]">
                       Edit Animation
                     </button>
                   </div>
                 </div>
-                <div className="hidden lg:flex lg:flex-row w-auto items-center h-auto justify-center space-x-4 px-6  border border-black m-0.5 py-1">
+                <div className="hidden lg:flex lg:flex-row w-auto items-center h-auto justify-center space-x-4 px-6 m-0.5 py-1">
                   <button
                     onClick={() => setLikes(!likes)}
-                    className="p-2 flex-grow space-x-2 rounded-md border border-black inline-flex items-center justify-center bg-[#F3F3F3]"
+                    className="p-2 flex-grow space-x-2 rounded-md  inline-flex items-center justify-center bg-[#F3F3F3]"
                   >
                     <h4 className="xl:text-lg lg:text-base font-medium">
                       Add to Likes
                     </h4>
                     <FaHeart size={20} />
                   </button>
-                  <button className="p-2 flex-grow space-x-2 rounded-md border border-black inline-flex items-center justify-center bg-[#F3F3F3]">
+                  <button className="p-2 flex-grow space-x-2 rounded-md  inline-flex items-center justify-center bg-[#F3F3F3]">
                     <h4 className="xl:text-lg lg:text-base font-medium">
                       Share Vector
                     </h4>

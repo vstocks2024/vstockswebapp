@@ -27,7 +27,8 @@ import { Vector_Url } from "@/lib/types";
 import SimilarVectors from "./SimilarVectors";
 import ModalCloseButton from "./ModalCloseButton";
 import RelatedTag from "./RelatedTag";
-import { Skeleton } from "@/components/ui/skeleton"
+import { Skeleton } from "@/components/ui/skeleton";
+
 
 
 export default function VectorsGrid({
@@ -79,7 +80,26 @@ export default function VectorsGrid({
     );
   };
 
-  const handleGetSimilarVectors = async () => {};
+  const handleDownloadJPEG = async () => {
+    console.log(modal.vectorItem.url);
+    await axios.get(modal.vectorItem.url,{
+      responseType:"blob",
+    }).then(async(obj)=>{
+      const url=URL.createObjectURL(obj.data);
+      const a=document.createElement(`a`);
+      a.href=url;
+      a.download=`${Date.now()}`;
+      a.style.display=`none`;
+      document.body.append(a);
+      a.click();
+      a.remove();
+      URL.revokeObjectURL(url);
+      
+
+    }).catch((error)=>{
+      console.log(error);
+    })
+  };
 
   const handleModalSize = () => {
     if (typeof window != "undefined") {
@@ -190,16 +210,13 @@ export default function VectorsGrid({
                       SVG&nbsp;
                       <FaArrowDownLong size={15} color="#FFFFFF" />
                     </Link>{" "}
-                    <a
+                    <button
                       className="bg-[#0BAC6F] inline-flex items-center w-[30%]  justify-center p-1 rounded-full text-lg font-normal text-white"
-                      download={
-                        modal.vectorItem ? modal.vectorItem.vector_id : "/"
-                      }
-                      href={modal.vectorItem ? modal.vectorItem.url : "/"}
+                     onClick={()=>handleDownloadJPEG()}
                     >
                       JPEG&nbsp;
                       <FaArrowDownLong size={15} color="#FFFFFF" />
-                    </a>{" "}
+                    </button>{" "}
                     <Link
                       className="bg-[#0BAC6F] inline-flex w-[30%] justify-center items-center p-1 rounded-full text-lg font-normal text-white"
                       href={"/"}

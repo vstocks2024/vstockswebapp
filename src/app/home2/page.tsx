@@ -6,25 +6,23 @@ import EditOwn from "../../components/EditOwn";
 import PromotionalViews from "../../components/PromotionalViews";
 import RecommendedViews from "../../components/RecommendedViews";
 import ClientReview from "../../components/ClientReviews";
-import MainLayout from "@/components/layouts/MainLayout";
+import MainLayout from "./_components/layout/MainLayout";
 
 export default function Home() {
   return (
     <MainLayout>
-    <main className=" container mx-auto bg-[#FEFAFF]">    
-         <Category/>
-         <div className="mt-[40px] "/>
+      <main className=" container mx-auto bg-[#FEFAFF]">
+        <Category />
+        <div className="mt-[40px] " />
         <NewlyAdded />
-      
-      <div className="mt-[40px]"/>
+        <div className="mt-[40px]" />
         <EditOwn />
-      
-      <div className="mt-[45px]">
-        <PromotionalViews />
-      </div>
-      <RecommendedViews/>
-      <ClientReview/>
-    </main>
+        <div className="mt-[45px]">
+          <PromotionalViews />
+        </div>
+        <RecommendedViews />
+        <ClientReview />
+      </main>
     </MainLayout>
   );
 }

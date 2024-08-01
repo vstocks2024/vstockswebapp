@@ -29,8 +29,6 @@ import ModalCloseButton from "./ModalCloseButton";
 import RelatedTag from "./RelatedTag";
 import { Skeleton } from "@/components/ui/skeleton";
 
-
-
 export default function VectorsGrid({
   vectorUrlData,
 }: {
@@ -82,23 +80,24 @@ export default function VectorsGrid({
 
   const handleDownloadJPEG = async () => {
     console.log(modal.vectorItem.url);
-    await axios.get(modal.vectorItem.url,{
-      responseType:"blob",
-    }).then(async(obj)=>{
-      const url=URL.createObjectURL(obj.data);
-      const a=document.createElement(`a`);
-      a.href=url;
-      a.download=`${Date.now()}`;
-      a.style.display=`none`;
-      document.body.append(a);
-      a.click();
-      a.remove();
-      URL.revokeObjectURL(url);
-      
-
-    }).catch((error)=>{
-      console.log(error);
-    })
+    await axios
+      .get(`${modal.vectorItem.url}`, {
+        responseType: "blob",
+      })
+      .then(async (obj) => {
+        const url = URL.createObjectURL(obj.data);
+        const a = document.createElement(`a`);
+        a.href = url;
+        a.download = `${Date.now()}`;
+        a.style.display = `none`;
+        document.body.append(a);
+        a.click();
+        a.remove();
+        URL.revokeObjectURL(url);
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   };
 
   const handleModalSize = () => {
@@ -147,11 +146,12 @@ export default function VectorsGrid({
           {vectorUrlData.map((item) => {
             return (
               <>
-              <Suspense fallback={<Skeleton className="w-[100px] h-[20px] rounded" />}>
-                <VectorCard key={nanoid()} item={item} />
+                <Suspense
+                  fallback={<Skeleton className="w-[100px] h-[20px] rounded" />}
+                >
+                  <VectorCard key={nanoid()} item={item} />
                 </Suspense>
               </>
-
             );
           })}
         </div>
@@ -182,9 +182,7 @@ export default function VectorsGrid({
                     src={modal.vectorItem ? modal.vectorItem.url : ""}
                   />
                 </Link>
-                <div
-                  className="absolute inline-block -translate-x-[10%] -translate-y-[15%] top-[15%] right-[10%] items-center justify-center space-y-1 lg:hidden"
-                >
+                <div className="absolute inline-block -translate-x-[10%] -translate-y-[15%] top-[15%] right-[10%] items-center justify-center space-y-1 lg:hidden">
                   <FaHeart className="cursor-pointer" size={30} />
                   <PiShareFatFill size={30} />
                 </div>
@@ -212,7 +210,7 @@ export default function VectorsGrid({
                     </Link>{" "}
                     <button
                       className="bg-[#0BAC6F] inline-flex items-center w-[30%]  justify-center p-1 rounded-full text-lg font-normal text-white"
-                     onClick={()=>handleDownloadJPEG()}
+                      onClick={() => handleDownloadJPEG()}
                     >
                       JPEG&nbsp;
                       <FaArrowDownLong size={15} color="#FFFFFF" />
@@ -227,9 +225,7 @@ export default function VectorsGrid({
                   </div>
                 </div>
                 <div className=" hidden lg:flex lg:flex-col bg-[#F3F3F3] h-auto   items-center space-y-1 px-3 py-1">
-                  <p className="text-lg font-normal m-0.5">
-                    OR
-                  </p>
+                  <p className="text-lg font-normal m-0.5">OR</p>
                   <div className=" inline-flex flex-row items-center w-full justify-around m-0.5 p-1">
                     <button className="rounded-full  p-2 text-base w-1/2 text-white   m-0.5 bg-[#0B85AC]">
                       Edit Online

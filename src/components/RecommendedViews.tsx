@@ -1,11 +1,41 @@
-"use client";
-
 import React from "react";
 import "@/app/globals.css";
 import Image from "next/image";
 import Link from "next/link";
+import { Animations_Url } from "@/lib/types";
+import { z } from "zod";
+import { nanoid } from "nanoid";
+import { Card } from "./ui/card";
+async function getDataRecommendedOne():Promise<z.infer<typeof Animations_Url>[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/animations_url/getrecommendedone`,{
+    method:"GET"
+  });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
 
-const RecommendedViews = () => {
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+async function getDataRecommendedTwo():Promise<z.infer<typeof Animations_Url>[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/animations_url/getrecommendedtwo`,{
+    method:"GET"
+  });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+export default async function RecommendedViews(){
+  const [DataRecommendedOne,DataRecommendedTwo]=await Promise.all([getDataRecommendedOne(),getDataRecommendedTwo()]);
   return (
     <div className="bg-[#F1F4FB]">
       <div className=" mx-auto">
@@ -16,62 +46,34 @@ const RecommendedViews = () => {
           </h2>
         </div>
         <div className="flex flex-col m-1 p-1  justify-center items-center  px-8 md:flex-row md:space-x-8">
-          <div className="cursor-pointer m-1 p-1">
-            <Link href={{ pathname: "/" }}>
-              {" "}
+          
+          { (DataRecommendedOne && DataRecommendedOne.length>0)  ? DataRecommendedOne.map((card)=>{ 
+            return (<Card className="w-[264px] h-[188px] md:w-[557px] md:h-[395px] rounded" key={nanoid()}><div key={nanoid()} className="cursor-pointer"><Link href={{ pathname: "/" }}>
               <img
-                className="w-[264px] h-[188px] md:w-[557px] md:h-[395px] justify-self-center"
-                src="./images/Navratri1.svg"
+                className="w-[264px] h-[188px] md:w-[557px] md:h-[395px] object-fill rounded"
+                src={card.thumbnail_url}
                 alt=""
               />
-            </Link>
-          </div>
+            </Link></div></Card>)}):<></>
+            }
+          
           <div className=" m-1 p-1 grid grid-cols-1 lg:grid-cols-2 gap-x-8 gap-y-4">
-            <div className="">
-              <Link href={{ pathname: "/" }}>
-                <Image
-                  width={264}
-                  height={187.217}
-                  className=""
-                  src="./images/r1.svg"
-                  alt={""}
-                />
-              </Link>
-            </div>
-            <div className="">
-              <Link href={{ pathname: "/" }}>
-                <Image
-                  width={264}
-                  height={187.217}
-                  className=""
-                  src="./images/r3.svg"
-                  alt={""}
-                />
-              </Link>
-            </div>
-
-            <div className="">
-              <Link href={{ pathname: "/" }}>
-                <Image
-                  width={264}
-                  height={187.217}
-                  className=""
-                  src="./images/r2.svg"
-                  alt={""}
-                />
-              </Link>
-            </div>
-            <div className="">
-              <Link href={{ pathname: "/" }}>
-                <Image
-                  width={264}
-                  height={187.217}
-                  className=""
-                  src="./images/r4.svg"
-                  alt={""}
-                />
-              </Link>
-            </div>
+            { (DataRecommendedTwo && DataRecommendedTwo.length>0) ? 
+            DataRecommendedTwo.map((card)=>{
+                   return (<Card  className="w-[264px] h-[187.217px] rounded" key={nanoid()}><div className="">
+                    <Link href={{ pathname: "/" }}>
+                      <Image
+                        width={264}
+                        height={187.217}
+                        className="w-[264px] h-[187.217px] rounded"
+                        src={card.thumbnail_url}
+                        alt={""}
+                      />
+                    </Link>
+                  </div></Card>)
+            }):<></>
+            
+            }
           </div>
         </div>
       </div>
@@ -79,4 +81,4 @@ const RecommendedViews = () => {
   );
 };
 
-export default RecommendedViews;
+

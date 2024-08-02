@@ -20,7 +20,7 @@ export default function AnimationHomeCard({card}:{card:z.infer<typeof Animations
         <Image
           width={264}
           height={187.217}
-          className=" flex-shrink-0 rounded-[9.479px] bg-cover bg-no-repeat  bg-[#D9D9D9]"
+          className="w-[264px] h-[187.217px] flex-shrink-0 rounded-[9.479px] bg-cover bg-no-repeat  bg-[#D9D9D9]"
           src={card.thumbnail_url}
           alt=""
         />

@@ -4,11 +4,15 @@ import { Animations_Url } from "@/lib/types";
 import { z } from "zod";
 import AnimationHomeCard from "@/app/home2/_components/AnimationHomeCard";
 import { nanoid } from "nanoid";
+import { Card } from "./ui/card";
 async function getData(): Promise<z.infer<typeof Animations_Url>[]> {
-  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/animations_url/getnewadded`,{
-    method:"GET",
-    cache:"no-store"
-  });
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/animations_url/getnewadded`,
+    {
+      method: "GET",
+      cache: "no-store",
+    }
+  );
   // The return value is *not* serialized
   // You can return Date, Map, Set, etc.
 
@@ -20,7 +24,7 @@ async function getData(): Promise<z.infer<typeof Animations_Url>[]> {
   return res.json();
 }
 export default async function NewlyAdded() {
-  const data=await getData();
+  const data = await getData();
   return (
     <div className="m-1 ">
       <div className="m-1 mx-16">
@@ -41,12 +45,19 @@ export default async function NewlyAdded() {
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-center justify-between gap-[47px]">
-           { data && data.length>0 ? data.map((card)=>{ 
-            return (<div key={nanoid()} className=" cursor-pointer">
-              
-                <AnimationHomeCard key={nanoid()}  card={card}/>
-              
-            </div>)}):<></>}
+            {data && data.length > 0 ? (
+              data.map((card) => {
+                return (
+                  <Card className="w-[264px] h-[187.217px]" key={nanoid()}>
+                    <div className=" cursor-pointer">
+                      <AnimationHomeCard key={nanoid()} card={card} />
+                    </div>
+                  </Card>
+                );
+              })
+            ) : (
+              <></>
+            )}
           </div>
 
           <div className="flex justify-center  py-1 items-center">
@@ -60,6 +71,4 @@ export default async function NewlyAdded() {
       </div>
     </div>
   );
-};
-
-
+}

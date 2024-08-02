@@ -1,5 +1,5 @@
 import NavBar from "@/components/layouts/includes/NavBar";
-import VectorSearchandBreadCrumbs from "../../VectorSearchandBreadCrumbs";
+import AnimationSearchandBreadCrumbs from "../../AnimationSearchandBreadCrumbs";
 
 export default function Header() {
   // const pathname = usePathname();
@@ -9,7 +9,7 @@ export default function Header() {
       <div className={`bg-[#2E67DD] shadow-headershadow `}>
         <header className={`bg-[#2E67DD] container mx-auto`}>
           <NavBar />
-          <VectorSearchandBreadCrumbs/>
+          <AnimationSearchandBreadCrumbs/>
         </header>
       </div>
     </>

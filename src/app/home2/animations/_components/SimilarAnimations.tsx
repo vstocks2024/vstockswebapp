@@ -1,7 +1,7 @@
 "use client";
 import { useModal } from "@/context/modal";
 import React, { useEffect, useState } from "react";
-import SimilarVectorCard from "./SimilarVectorCard";
+import SimilarVectorCard from "./SimilarAnimationCard";
 import { Vector_Url } from "@/lib/types";
 import { z } from "zod";
 import { nanoid } from "nanoid";

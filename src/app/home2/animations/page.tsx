@@ -1,34 +1,120 @@
-import MainLayout from "@/components/layouts/MainLayout";
+import Image from "next/image";
 
 import { z } from "zod";
 import Tabs from "../_components/Tabs";
+import AnimationsGrid from "./_components/AnimationsGrid";
 
-const Category = z.object({
-  id: z.string(),
-  name: z.string(),
+import PaginateAnimationrGrid from "./_components/PaginateAnimationGrid";
+import { useModal } from "@/context/modal";
+import { BsSliders } from "react-icons/bs";
+import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
+import CombineFilters from "./_components/CombineFilters";
+import { Vector_Url } from "@/lib/types";
+import { TotalPages } from "@/lib/types";
+import MainLayout from "./_components/layout/MainLayout";
+import PaginateAnimationGrid from "./_components/PaginateAnimationGrid";
+
+const SearchParams = z.object({
+  page: z.string().optional(),
+  license: z.string().optional(),
+  orientation: z.string().optional(),
+  format: z.string().optional(),
+  sort: z.string().optional(),
 });
 
-async function getData(): Promise<z.infer<typeof Category>[]> {
-  const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/categories/listidname`
-  );
+async function getVectorUrlData(
+  currentPage: string,
+  currentLicense: string,
+  currentOrientation: string,
+  currentFormat: string,
+  currentSort: string
+): Promise<z.infer<typeof Vector_Url>[]> {
+  console.log(currentPage);
+  console.log(currentLicense);
+  console.log(currentOrientation);
+  console.log(currentFormat);
 
-  if (!res.ok) {
-    // This will activate the closest `error.js` Error Boundary
-    throw new Error("Failed to fetch data");
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/vectors/list_vectors_url/${currentPage}/${currentLicense}/${currentOrientation}/${currentFormat}/${currentSort}`,
+    {
+      method: "GET",
+      cache: "no-store",
+    }
+  );
+  try {
+    if (!res.ok) {
+      throw new Error("Failed to fetch data");
+    }
+  } catch (error) {
+    console.log("Exception Raised", error);
   }
 
   return res.json();
 }
 
-export default function AnimationsPage() {
+async function getTotalVectorPages(
+  currentPage: string,
+  currentLicense: string,
+  currentOrientation: string,
+  currentFormat: string
+): Promise<z.infer<typeof TotalPages>> {
+  const res = await fetch(
+    `${process.env.NEXT_PUBLIC_URL}/vectors/totalpages/${currentPage}/${currentLicense}/${currentOrientation}/${currentFormat}`,
+    {
+      method: "GET",
+      cache: "no-store",
+    }
+  );
+
+  if (!res.ok) {
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+export default async function VectorsPage({
+  searchParams,
+}: {
+  searchParams: z.infer<typeof SearchParams>;
+}) {
+  const currentPage = searchParams?.page || "1";
+  const currentLicense = searchParams?.license || "all";
+  const currentOrientation = searchParams?.orientation || "all";
+  const currentFormat = searchParams?.format || "all";
+  const currentSort = searchParams?.sort || "relevance";
+
+  const vectorWithUrlData = getVectorUrlData(
+    currentPage,
+    currentLicense,
+    currentOrientation,
+    currentFormat,
+    currentSort
+  );
+  const vectorPages = getTotalVectorPages(
+    currentPage,
+    currentLicense,
+    currentOrientation,
+    currentFormat
+  );
+
+  const [vectorUrlData, totalVectorPages] = await Promise.all([
+    vectorWithUrlData,
+    vectorPages,
+  ]);
+
+  console.log(totalVectorPages);
+
   return (
     <>
       <MainLayout>
         <main className="bg-white">
-          <div className="container mx-auto">
-            <Tabs />
-            {/* Filter and Sorted By */}
+          <div className="container">
+            <div className="mx-20">
+              <Tabs />
+              <CombineFilters />
+              <AnimationsGrid vectorUrlData={vectorUrlData} />
+              <PaginateAnimationGrid pages={totalVectorPages} />
+            </div>
           </div>
         </main>
       </MainLayout>

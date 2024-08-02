@@ -53,7 +53,20 @@ export const Pages = z.object({
 export const CRUMB=z.object({
   id : z.string(),
   name:z.string()
-
 })
 
 
+export const Animations_Url=z.object({
+  animation_id: z.string(),
+  name: z.string(),
+  description: z.string(),
+  likes: z.number(),
+  shares: z.number(),
+  format: z.string(),
+  license: z.string(),
+  orientation: z.string(),
+  animation_data:z.any(),
+  thumbnail_url: z.string(),
+  createdAt: z.date(),
+  updatedAt: z.date(),
+});

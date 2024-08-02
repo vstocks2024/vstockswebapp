@@ -1,17 +1,26 @@
-"use client";
-
 import Link from "next/link";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { Animations_Url } from "@/lib/types";
+import { z } from "zod";
+import AnimationHomeCard from "@/app/home2/_components/AnimationHomeCard";
+import { nanoid } from "nanoid";
+async function getData(): Promise<z.infer<typeof Animations_Url>[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/animations_url/getnewadded`,{
+    method:"GET",
+    cache:"no-store"
+  });
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
 
-const NewlyAdded = () => {
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
 
-  
-const handleViewAll=()=>{
-   router.push("/category");
+  return res.json();
 }
-
-  const router=useRouter();
+export default async function NewlyAdded() {
+  const data=await getData();
   return (
     <div className="m-1 ">
       <div className="m-1 mx-16">
@@ -23,7 +32,7 @@ const handleViewAll=()=>{
               </h3>
             </div>
             <div className="">
-              <button onClick={handleViewAll}>
+              <button>
                 <h3 className="hidden underline md:flex font-poppins400 text-[14px] text-[#000] leading-[25.62px] not-italic">
                   View All
                 </h3>
@@ -32,50 +41,12 @@ const handleViewAll=()=>{
           </div>
 
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 items-center justify-between gap-[47px]">
-            <div className=" cursor-pointer">
-              <Link href={"/"}>
-                <Image
-                  width={264}
-                  height={187.217}
-                  className=" flex-shrink-0 rounded-[9.479px] bg-cover bg-no-repeat  bg-[#D9D9D9]"
-                  src="./images/Newly1.svg"
-                  alt=""
-                />
-              </Link>
-            </div>
-            <div className=" cursor-pointer">
-              <Link href={"/"}>
-                <Image
-                  width={264}
-                  height={187.217}
-                  className=" flex-shrink-0 rounded-[9.479px] bg-cover bg-no-repeat  bg-[#D9D9D9]"
-                  src="./images/Newly2.svg"
-                  alt=""
-                />
-              </Link>
-            </div>
-            <div className=" cursor-pointer">
-              <Link href={"/"}>
-                <Image
-                  width={264}
-                  height={187.217}
-                  className=" flex-shrink-0 rounded-[9.479px] bg-cover bg-no-repeat  bg-[#D9D9D9]"
-                  src="./images/Newly3.svg"
-                  alt=""
-                />
-              </Link>
-            </div>
-            <div className=" cursor-pointer">
-              <Link href={"/"}>
-                <Image
-                  width={264}
-                  height={187.217}
-                  className=" flex-shrink-0 rounded-[9.479px] bg-cover bg-no-repeat  bg-[#D9D9D9]"
-                  src="./images/Newly4.svg"
-                  alt=""
-                />
-              </Link>
-            </div>
+           { data && data.length>0 ? data.map((card)=>{ 
+            return (<div key={nanoid()} className=" cursor-pointer">
+              
+                <AnimationHomeCard key={nanoid()}  card={card}/>
+              
+            </div>)}):<></>}
           </div>
 
           <div className="flex justify-center  py-1 items-center">
@@ -91,4 +62,4 @@ const handleViewAll=()=>{
   );
 };
 
-export default NewlyAdded;
+

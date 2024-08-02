@@ -7,7 +7,7 @@ import { Vector_Url } from "@/lib/types";
 
 
 
-export default function VectorCard({
+export default function AnimationCard({
   item,
 }: {
   item: z.infer<typeof Vector_Url>;

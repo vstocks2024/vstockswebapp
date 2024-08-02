@@ -1,7 +1,7 @@
 "use client";
 import { useModal } from "@/context/modal";
 import React, { useEffect, useState } from "react";
-import SimilarVectorCard from "./SimilarAnimationCard";
+import SimilarAnimationCard from "./SimilarAnimationCard";
 import { Vector_Url } from "@/lib/types";
 import { z } from "zod";
 import { nanoid } from "nanoid";
@@ -32,7 +32,7 @@ export default function SimilarAnimations() {
           categoryArr.map((item) => {
             return (
               <>
-                <SimilarVectorCard key={nanoid()} card={item} />
+                <SimilarAnimationCard key={nanoid()} card={item} />
               </>
             );
           })}

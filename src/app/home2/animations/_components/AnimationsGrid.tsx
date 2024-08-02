@@ -1,7 +1,7 @@
 "use client";
 import React, { Suspense, useEffect } from "react";
 import { z } from "zod";
-import VectorCard from "./AnimationCard";
+import AnimationCard from "./AnimationCard";
 import { nanoid } from "nanoid";
 import { Modal } from "flowbite-react";
 import { Button } from "@/components/ui/button";
@@ -149,7 +149,7 @@ export default function AnimationsGrid({
                 <Suspense
                   fallback={<Skeleton className="w-[100px] h-[20px] rounded" />}
                 >
-                  <VectorCard key={nanoid()} item={item} />
+                  <AnimationCard key={nanoid()} item={item} />
                 </Suspense>
               </>
             );

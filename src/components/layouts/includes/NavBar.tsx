@@ -171,9 +171,9 @@ export default function NavBar() {
           </button>
         </div>
       </div>
-      <div className="hidden lg:flex lg:py-3 justify-between items-center ">
+      <div className="hidden lg:flex lg:my-3  justify-between items-center ">
         <div className="lg:relative my-1">
-          <nav className="flex flex-row items-center justify-center">
+          <nav className="flex flex-row items-center justify-center lg:gap-x-[82px]">
             <ul className="text-white  font-light lg:gap-x-[82px]  dark:text-white inline-flex flex-row  justify-around">
               <button
                 type="button"
@@ -181,10 +181,15 @@ export default function NavBar() {
                   router.push("/");
                 }}
               >
-                <li className="text-[36px]  m-1 p-1 font-semibold font-poppins600 not-italic text-white cursor-pointer text-nowrap">
-                  V&nbsp;stocks
+                <li className=" mb-8 cursor-pointer ">
+                <img
+            className="w-[181px] h-[50px]"
+            src="/logo/vstocks2.png"
+            />
                 </li>
               </button>
+              </ul>
+              <ul className="text-white  font-light lg:gap-x-[82px]  dark:text-white inline-flex flex-row  justify-around">
               <button
                 type="button"
                 onClick={() => {

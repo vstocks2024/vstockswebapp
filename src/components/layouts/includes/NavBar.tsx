@@ -181,7 +181,7 @@ export default function NavBar() {
                   router.push("/");
                 }}
               >
-                <li className=" mb-[22px] cursor-pointer ">
+                <li className=" mb-6 cursor-pointer ">
                 <img
             className="w-[135.75px] h-[37.5px]"
             src="/logo/vstocks2.png"

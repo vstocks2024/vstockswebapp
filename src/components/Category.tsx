@@ -3,10 +3,25 @@ import "@/app/globals.css";
 import Link from "next/link";
 import Image from "next/image";
 import { z } from "zod";
-import { Vector_Url } from "@/lib/types";
+import { Animations_Url, Vector_Url } from "@/lib/types";
 
-async function getData():Promise<z.infer<typeof Vector_Url>[]> {
+async function getVectorData():Promise<z.infer<typeof Vector_Url>[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/vectors_url/randomvector`,{
+    method:"GET",
+    cache:"no-store"
+  })
+  // The return value is *not* serialized
+  // You can return Date, Map, Set, etc.
+ 
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error('Failed to fetch data')
+  }
+ 
+  return res.json()
+}
+async function getAnimationData():Promise<z.infer<typeof Animations_Url>[]> {
+  const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/animations_url/randomanimation`,{
     method:"GET",
     cache:"no-store"
   })
@@ -22,8 +37,8 @@ async function getData():Promise<z.infer<typeof Vector_Url>[]> {
 }
 
 export default async function Category() {
-  const data= await getData();
-  console.log(data);
+  const [dataVector,dataAnimation]= await Promise.all([getVectorData(),getAnimationData()]);
+  
   return (
     <div className="my-1 mx-[64px] p-1">
       <div className="flex flex-col m-1 ">
@@ -37,13 +52,13 @@ export default async function Category() {
           </h4>
         </div>
         <div className="flex flex-col items-center justify-around p-1 space-y-4 py-6 px-32 lg:flex-row lg:space-y-0 lg:space-x-2 lg:px-0 lg:justify-between lg:items-center lg:pt-[60px]">
-          <Link href={"/home2/vectors"}>
+          <Link href={"/home/vectors"}>
             <div className="cursor-pointer flex flex-col items-center justify-between space-y-[30px]">
               <img
                 width={250}
                 height={142}
                 className="shadow-category w-[250px] h-[142px] bg-cover bg-[#D9D9D9]  bg-no-repeat rounded-[30px] border border-solid border-[#FFF]"
-                src={data[0].url}
+                src={dataVector[0].url}
                 alt="Vector Graphics"/>
 
               <h3 className="text-center font-normal font-poppins400  leading-normal text-[16px] md:text-[20px]">
@@ -51,13 +66,13 @@ export default async function Category() {
               </h3>
             </div>
           </Link>
-          <Link href={"/home2/animations"}>
+          <Link href={"/home/animations"}>
             <div className="cursor-pointer flex flex-col items-center justify-between space-y-[30px]">
               <img
                 width={250}
                 height={142}
                 className="shadow-category bg-cover w-[250px] h-[142px]  bg-cover bg-[#D9D9D9]  bg-no-repeat rounded-[30px] border border-solid border-[#FFF]"
-                src="./images/ne2.svg"
+                src={dataAnimation[0].thumbnail_url}
                 alt="Video Animations"
               />
               <h3 className="text-center font-normal font-poppins400  leading-normal text-[16px] md:text-[20px] ">
@@ -65,7 +80,7 @@ export default async function Category() {
               </h3>
             </div>
           </Link>
-          <Link href={"/home2/posters"}>
+          <Link href={"/home/posters"}>
             <div className="cursor-pointer flex flex-col items-center justify-between space-y-[30px]">
               <img
                 width={250}

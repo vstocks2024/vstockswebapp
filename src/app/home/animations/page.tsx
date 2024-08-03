@@ -3,11 +3,6 @@ import Image from "next/image";
 import { z } from "zod";
 import Tabs from "../_components/Tabs";
 import AnimationsGrid from "./_components/AnimationsGrid";
-
-import PaginateAnimationrGrid from "./_components/PaginateAnimationGrid";
-import { useModal } from "@/context/modal";
-import { BsSliders } from "react-icons/bs";
-import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import CombineFilters from "./_components/CombineFilters";
 import { Vector_Url } from "@/lib/types";
 import { TotalPages } from "@/lib/types";

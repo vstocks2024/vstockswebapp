@@ -23,7 +23,7 @@ export default function BreadCrumb() {
       
       {
       crumbs && crumbs.map((crumb)=>{
-       return (crumb.name==="home2" ?<Fragment key={crumb.id}><FiHome color="#FFF" size={15}/>&nbsp;<h5 className="text-[16px] font-poppins600 font-medium not-italic">Home2</h5></Fragment>:<Fragment key={crumb.id}><MdKeyboardArrowRight color="#FFF" size={20}/>
+       return (crumb.name==="home" ?<Fragment key={crumb.id}><FiHome color="#FFF" size={15}/>&nbsp;<h5 className="text-[16px] font-poppins600 font-medium not-italic">home</h5></Fragment>:<Fragment key={crumb.id}><MdKeyboardArrowRight color="#FFF" size={20}/>
        <h5 className="text-[16px] font-poppins600 font-medium not-italic">{crumb.name[0]?.toUpperCase()+crumb.name.slice(1)}</h5></Fragment>)
        })
        }

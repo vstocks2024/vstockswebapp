@@ -24,7 +24,9 @@ export default function SortBy(){
       setRelevance(false);
       sortBy.setSort("Alphabetically")
       sp.set("sort","alpha")
-      router.push(`${pathname}?${sp.toString()}`)
+      router.push(`${pathname}?${sp.toString()}`,{
+        scroll:false
+      })
 
      }
      const handlePopular=()=>{
@@ -34,7 +36,9 @@ export default function SortBy(){
       setRelevance(false);
       sortBy.setSort("Most Popular")
       sp.set("sort","popular")
-      router.push(`${pathname}?${sp.toString()}`)
+      router.push(`${pathname}?${sp.toString()}`,{
+        scroll:false
+      })
 
      }
      const  handleDate=()=>{
@@ -44,7 +48,9 @@ export default function SortBy(){
       setRelevance(false);
       sortBy.setSort("Date")
       sp.set("sort","date")
-      router.push(`${pathname}?${sp.toString()}`)
+      router.push(`${pathname}?${sp.toString()}`,{
+        scroll:false
+      })
 
      }
 const handleRelevance=()=>{
@@ -54,7 +60,9 @@ const handleRelevance=()=>{
       setRelevance(true);
       sortBy.setSort("Most Relevant")
       sp.set("sort","relevance")
-      router.push(`${pathname}?${sp.toString()}`)
+      router.push(`${pathname}?${sp.toString()}`,{
+        scroll:false
+      })
 
      }
      

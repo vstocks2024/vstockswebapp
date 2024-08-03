@@ -11,10 +11,10 @@ export default function Tabs() {
         <button
           type="button"
           onClick={() => {
-            router.push("/home2/vectors");
+            router.push("/home/vectors");
           }}
           className={`${
-            pathname.startsWith("/home2/vectors") === true
+            pathname.startsWith("/home/vectors") === true
               ? "bg-[#2E67DD] text-white font-medium border-white"
               : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
           } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border`}
@@ -24,10 +24,10 @@ export default function Tabs() {
         <button
           type="button"
           onClick={() => {
-            router.push("/home2/animations");
+            router.push("/home/animations");
           }}
           className={`${
-            pathname.startsWith("/home2/animations") === true
+            pathname.startsWith("/home/animations") === true
               ? "bg-[#2E67DD] text-white font-medium border-white"
               : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
           } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border`}
@@ -37,10 +37,10 @@ export default function Tabs() {
         <button
           type="button"
           onClick={() => {
-            router.push("/home2/posters");
+            router.push("/home/posters");
           }}
           className={`${
-            pathname.startsWith("/home2/posters") === true
+            pathname.startsWith("/home/posters") === true
               ? "bg-[#2E67DD] text-white font-medium border-white"
               : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
           } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border`}
@@ -50,10 +50,10 @@ export default function Tabs() {
         <button
           type="button"
           onClick={() => {
-            router.push("/home2/brochures");
+            router.push("/home/brochures");
           }}
           className={`${
-            pathname.startsWith("/home2/brochures") === true
+            pathname.startsWith("/home/brochures") === true
               ? "bg-[#2E67DD] text-white font-medium border-white"
               : "bg-white text-black border-black hover:bg-[#2E67DD] hover:border-white hover:text-white"
           } px-[50px] py-[10px] text-center font-poppins600 font-medium not-italic text-[20px] rounded-[82px] border `}

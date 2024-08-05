@@ -1,11 +1,11 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Animations_Url } from "@/lib/types";
+import { Animation_Url } from "@/lib/types";
 import { z } from "zod";
 import AnimationHomeCard from "@/app/home/_components/AnimationHomeCard";
 import { nanoid } from "nanoid";
 import { Card } from "./ui/card";
-async function getData(): Promise<z.infer<typeof Animations_Url>[]> {
+async function getData(): Promise<z.infer<typeof Animation_Url>[]> {
   const res = await fetch(
     `${process.env.NEXT_PUBLIC_URL}/animations_url/getnewadded`,
     {

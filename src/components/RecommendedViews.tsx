@@ -2,11 +2,11 @@ import React from "react";
 import "@/app/globals.css";
 import Image from "next/image";
 import Link from "next/link";
-import { Animations_Url } from "@/lib/types";
+import { Animation_Url } from "@/lib/types";
 import { z } from "zod";
 import { nanoid } from "nanoid";
 import { Card } from "./ui/card";
-async function getDataRecommendedOne():Promise<z.infer<typeof Animations_Url>[]> {
+async function getDataRecommendedOne():Promise<z.infer<typeof Animation_Url>[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/animations_url/getrecommendedone`,{
     method:"GET"
   });
@@ -20,7 +20,7 @@ async function getDataRecommendedOne():Promise<z.infer<typeof Animations_Url>[]>
 
   return res.json();
 }
-async function getDataRecommendedTwo():Promise<z.infer<typeof Animations_Url>[]> {
+async function getDataRecommendedTwo():Promise<z.infer<typeof Animation_Url>[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/animations_url/getrecommendedtwo`,{
     method:"GET"
   });

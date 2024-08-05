@@ -3,7 +3,7 @@ import "@/app/globals.css";
 import Link from "next/link";
 import Image from "next/image";
 import { z } from "zod";
-import { Animations_Url, Vector_Url } from "@/lib/types";
+import { Animation_Url, Vector_Url } from "@/lib/types";
 
 async function getVectorData():Promise<z.infer<typeof Vector_Url>[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/vectors_url/randomvector`,{
@@ -20,7 +20,7 @@ async function getVectorData():Promise<z.infer<typeof Vector_Url>[]> {
  
   return res.json()
 }
-async function getAnimationData():Promise<z.infer<typeof Animations_Url>[]> {
+async function getAnimationData():Promise<z.infer<typeof Animation_Url>[]> {
   const res = await fetch(`${process.env.NEXT_PUBLIC_URL}/animations_url/randomanimation`,{
     method:"GET",
     cache:"no-store"

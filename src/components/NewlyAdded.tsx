@@ -26,7 +26,7 @@ async function getData(): Promise<z.infer<typeof Animation_Url>[]> {
 export default async function NewlyAdded() {
   const data = await getData();
   return (
-    <div className="m-1 ">
+    <div className="m-1 pb-[40px] ">
       <div className="m-1 mx-16">
         <div className="flex flex-col items-center justify-between gap-y-[24px] m-1">
           <div className="m-1 p-1 flex flex-row items-center justify-center md:justify-between  w-full">

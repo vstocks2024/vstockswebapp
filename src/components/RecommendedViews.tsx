@@ -39,13 +39,13 @@ export default async function RecommendedViews(){
   return (
     <div className="bg-[#F1F4FB]">
       <div className=" mx-auto">
-        <div className="py-8 px-20">
+        <div className="px-20">
           <h2 className="text-center md:text-start  text-[#001A5B] font-poppins600 font-medium  not-italic text-nowrap text-[20px] sm:text-[22px] md:text-[24px] lg:text-[26px] xl:text-[28px]">
             {" "}
             Recommended to You
           </h2>
         </div>
-        <div className="flex flex-col m-1 p-1  justify-center items-center  px-8 md:flex-row md:space-x-8">
+        <div className="flex flex-col py-8  justify-center items-center  px-8 md:flex-row md:space-x-8">
           
           { (DataRecommendedOne && DataRecommendedOne.length>0)  ? DataRecommendedOne.map((card)=>{ 
             return (<Card className="w-[264px] h-[188px] md:w-[557px] md:h-[395px] rounded-md" key={nanoid()}><div key={nanoid()} className="cursor-pointer"><Link href={{ pathname: "/" }}>

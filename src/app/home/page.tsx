@@ -11,16 +11,18 @@ import MainLayout from "./_components/layout/MainLayout";
 export default function Home() {
   return (
     <MainLayout>
-      <main className=" container mx-auto bg-[#FEFAFF]">
+      <main className="container mx-auto bg-[#FEFAFF]">
         <Category />
         <div className="mt-[40px] " />
         <NewlyAdded />
-        <div className="mt-[40px]" />
-        <EditOwn />
+      </main>
+      <EditOwn />
         <div className="mt-[45px]">
           <PromotionalViews />
         </div>
-        <RecommendedViews />
+      
+      <RecommendedViews />
+      <main className="container mx-auto bg-[#FEFAFF]">
         <ClientReview />
       </main>
     </MainLayout>

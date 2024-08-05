@@ -37,7 +37,9 @@ async function getAnimationData():Promise<z.infer<typeof Animation_Url>[]> {
 }
 
 export default async function Category() {
-  const [dataVector,dataAnimation]= await Promise.all([getVectorData(),getAnimationData()]);
+  const data1=await getVectorData();
+  const data2=await getAnimationData();
+  const [dataVector,dataAnimation]= await Promise.all([data1,data2]);
   
   return (
     <div className="my-1 mx-[64px] p-1">

@@ -75,7 +75,7 @@ export default function NavBar() {
 
   return (
     <div
-      className={`bg-[#2E67DD] mx-16   flex-grow  flex flex-col items-center justify-center lg:py-5`}
+      className={`bg-[#2E67DD] mx-16    flex-grow  flex flex-col items-center justify-center lg:py-5`}
     >
       {hamburger ? (
         <>
@@ -173,8 +173,8 @@ export default function NavBar() {
       </div>
       <div className="hidden lg:flex lg:my-3  justify-between items-center ">
         <div className="lg:relative my-1">
-          <nav className="flex flex-row items-center justify-center lg:gap-x-[82px]">
-            <ul className="text-white  font-light lg:gap-x-[82px]  dark:text-white inline-flex flex-row  justify-around">
+          <nav className="flex flex-row items-center justify-center lg:gap-x-[82px] ">
+            <ul className="text-white  font-light lg:gap-x-[82px]   dark:text-white inline-flex flex-row  justify-around">
               <button
                 type="button"
                 onClick={() => {
@@ -189,7 +189,7 @@ export default function NavBar() {
                 </li>
               </button>
               </ul>
-              <ul className="text-white  font-light lg:gap-x-[82px]  dark:text-white inline-flex flex-row  justify-around">
+              <ul className="text-white  font-light lg:gap-x-[82px]   dark:text-white inline-flex flex-row  justify-around">
               <button
                 type="button"
                 onClick={() => {
@@ -202,11 +202,8 @@ export default function NavBar() {
                 </li>
               </button>
               <button
-                onMouseEnter={() => {
-                  setTemplate(true);
-                }}
-                onMouseLeave={() => {
-                  setTemplate(false);
+                onClick={()=>{
+                  setTemplate(!template);
                 }}
                 className="relative m-0.5 p-0.5"
               >

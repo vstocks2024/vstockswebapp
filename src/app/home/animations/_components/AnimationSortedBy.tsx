@@ -5,7 +5,7 @@ import { usePathname, useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
 import { MdCheck } from "react-icons/md";
 
-export default function SortBy(){
+export default function AnimationSortBy(){
      const [alpha,setAlpha]=useState(false);
      const [popular,setPopular]=useState(false);
      const [date,setDate]=useState(false);

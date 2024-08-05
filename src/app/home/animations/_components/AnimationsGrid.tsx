@@ -20,56 +20,56 @@ import {
 import { IoClose } from "react-icons/io5";
 import axios from "axios";
 import AnimationFilters from "./AnimationFilters";
-import SortedBy from "./SortedBy";
+import AnimationSortedBy from "./AnimationSortedBy";
 import { useFilter } from "@/context/filter";
 import { useSort } from "@/context/sort";
-import { Vector_Url } from "@/lib/types";
+import { Animation_Url } from "@/lib/types";
 import SimilarAnimations from "./SimilarAnimations";
 import ModalCloseButton from "./ModalCloseButton";
 import RelatedTag from "./RelatedTag";
 import { Skeleton } from "@/components/ui/skeleton";
 
 export default function AnimationsGrid({
-  vectorUrlData,
+  animationUrlData,
 }: {
-  vectorUrlData: z.infer<typeof Vector_Url>[];
+  animationUrlData: z.infer<typeof  Animation_Url>[];
 }) {
   const modal = useModal();
   const filter = useFilter();
   const sort = useSort();
   const [likes, setLikes] = useState<boolean>(false);
-  modal.setVectorItemsArray(vectorUrlData);
+  modal.setAnimationItemsArray(animationUrlData);
 
-  const handlePrevVector = () => {
-    const currentIndex = modal.vectorItemsArray?.findIndex(
-      (element: z.infer<typeof Vector_Url>) =>
-        element.vector_id === modal.vectorItem.vector_id
+  const handlePrevAnimation = () => {
+    const currentIndex = modal.animationItemsArray?.findIndex(
+      (element: z.infer<typeof  Animation_Url>) =>
+        element.animation_id === modal.animationItem.animation_id
     );
 
     if (currentIndex === 0) {
-      modal.setVectorItem(
-        modal.vectorItemsArray[modal.vectorItemsArray.length - 1]
+      modal.setAnimationItem(
+        modal.AnimationItemsArray[modal.animationItemsArray.length - 1]
       );
     } else {
-      modal.setVectorItem(modal.vectorItemsArray[currentIndex - 1]);
+      modal.setAnimationItem(modal.animationItemsArray[currentIndex - 1]);
     }
   };
-  const handleNextVector = () => {
-    const currentIndex = modal.vectorItemsArray?.findIndex(
-      (element: z.infer<typeof Vector_Url>) =>
-        element.vector_id === modal.vectorItem.vector_id
+  const handleNextAnimation = () => {
+    const currentIndex = modal.animationItemsArray?.findIndex(
+      (element: z.infer<typeof  Animation_Url>) =>
+        element.animation_id === modal.animationItem.animation_id
     );
 
-    if (currentIndex === modal.vectorItemsArray.length - 1) {
-      modal.setVectorItem(modal.vectorItemsArray[0]);
+    if (currentIndex === modal.animationItemsArray.length - 1) {
+      modal.setAnimationItem(modal.animationItemsArray[0]);
     } else {
-      modal.setVectorItem(modal.vectorItemsArray[currentIndex + 1]);
+      modal.setAnimationItem(modal.animationItemsArray[currentIndex + 1]);
     }
   };
 
   const handleUpdateLikes = async () => {
     const resp = await axios.put(
-      `${process.env.NEXT_PUBLIC_URL}/vectors/${modal.vectorItem.vector_id}`,
+      `${process.env.NEXT_PUBLIC_URL}/vectors/${modal.animationItem.animation_id}`,
       {
         headers: {
           "Content-Type": "application/json",
@@ -78,64 +78,44 @@ export default function AnimationsGrid({
     );
   };
 
-  const handleDownloadJPEG = async () => {
-    console.log(modal.vectorItem.url);
-    await axios
-      .get(`${modal.vectorItem.url}`, {
-        responseType: "blob",
-      })
-      .then(async (obj) => {
-        const url = URL.createObjectURL(obj.data);
-        const a = document.createElement(`a`);
-        a.href = url;
-        a.download = `${Date.now()}`;
-        a.style.display = `none`;
-        document.body.append(a);
-        a.click();
-        a.remove();
-        URL.revokeObjectURL(url);
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  };
 
-  const handleModalSize = () => {
+
+  const handleAnimationModalSize = () => {
     if (typeof window != "undefined") {
-      if (window.innerWidth <= 640) modal.setSizeModal("sm");
+      if (window.innerWidth <= 640) modal.setSizeAnimationModal("sm");
       else if (window.innerWidth > 640 && window.innerWidth <= 768)
-        modal.setSizeModal("md");
+        modal.setSizeAnimationModal("md");
       else if (window.innerWidth > 768 && window.innerWidth <= 896)
-        modal.setSizeModal("lg");
+        modal.setSizeAnimationModal("lg");
       else if (window.innerWidth > 896 && window.innerWidth <= 1024)
-        modal.setSizeModal("2xl");
+        modal.setSizeAnimationModal("2xl");
       else if (window.innerWidth > 1024 && window.innerWidth <= 1152)
-        modal.setSizeModal("3xl");
+        modal.setSizeAnimationModal("3xl");
       else if (window.innerWidth > 1152 && window.innerWidth <= 1280)
-        modal.setSizeModal("4xl");
+        modal.setSizeAnimationModal("4xl");
       else if (window.innerWidth > 1280 && window.innerWidth <= 1408)
-        modal.setSizeModal("5xl");
+        modal.setSizeAnimationModal("5xl");
       else if (window.innerWidth > 1408 && window.innerWidth <= 1536)
-        modal.setSizeModal("6xl");
-      else modal.setSizeModal("7xl");
+        modal.setSizeAnimationModal("6xl");
+      else modal.setSizeAnimationModal("7xl");
     }
   };
 
   useEffect(() => {
-    window.addEventListener("resize", handleModalSize, false);
+    window.addEventListener("resize", handleAnimationModalSize, false);
     return () => {
-      window.removeEventListener("resize", handleModalSize, false);
+      window.removeEventListener("resize", handleAnimationModalSize, false);
     };
-  }, [modal.sizeModal]);
+  }, [modal.sizeAnimationModal]);
 
-  useEffect(() => {}, [modal.vectorItem]);
+  useEffect(() => {}, [modal.animationItem]);
 
   useEffect(() => {}, [likes]);
 
   return (
     <>
       <div className="items-start justify-between flex flex-row relative ">
-        {filter.openFilter === true ? <AnimationFilters key={nanoid()} /> : <></>}
+        {filter.openAnimationFilter === true ? <AnimationFilters key={nanoid()} /> : <></>}
         <div
           className={`grid grid-cols-2 w-full p-1  place-items-center place-content-evenly auto-rows-max justify-center items-center gap-2 ${
             filter.openFilter
@@ -143,7 +123,7 @@ export default function AnimationsGrid({
               : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
           }`}
         >
-          {vectorUrlData.map((item) => {
+          {animationUrlData.map((item) => {
             return (
               <>
                 <Suspense
@@ -155,17 +135,17 @@ export default function AnimationsGrid({
             );
           })}
         </div>
-        {sort.openSort ? <SortedBy /> : <></>}
+        {sort.openSort ? <AnimationSortedBy /> : <></>}
       </div>
 
       <Modal
-        show={modal.openModal}
+        show={modal.openAnimationModal}
         position={"center"}
-        size={modal.sizeModal}
-        onClose={() => modal.setOpenModal(false)}
+        size={modal.sizeAnimationModal}
+        onClose={() => modal.setOpenAnimationModal(false)}
       >
         <Button
-          onClick={handlePrevVector}
+          onClick={handlePrevAnimation}
           variant={"default"}
           className="absolute  bg-white bg-opacity-15 hover:bg-white hover:bg-opacity-30 top-1/2  -left-20 cursor-pointer h-auto w-auto "
         >
@@ -179,7 +159,7 @@ export default function AnimationsGrid({
                   <img
                     className="cursor-pointer rounded-md w-[350px] h-[350px] md:w-[375px] md:h-[375px] xl:w-[400px] xl:h-[400px]"
                     alt=""
-                    src={modal.vectorItem ? modal.vectorItem.url : ""}
+                    src={modal.animationItem ? modal.animationItem.url : ""}
                   />
                 </Link>
                 <div className="absolute inline-block -translate-x-[10%] -translate-y-[15%] top-[15%] right-[10%] items-center justify-center space-y-1 lg:hidden">
@@ -191,7 +171,7 @@ export default function AnimationsGrid({
                 <div className=" m-0.5 p-1 ">
                   <h3 className="text-lg font-bold">Description</h3>
                   <p className="text-sm font-normal text-wrap">
-                    {modal.vectorItem ? modal.vectorItem.description : ""}
+                    {modal.animationItem ? modal.animationItem.description : ""}
                   </p>
                 </div>
                 <div className="m-0.5 p-1 h-auto hidden lg:flex lg:flex-col items-center space-y-1">
@@ -205,21 +185,14 @@ export default function AnimationsGrid({
                       download
                       href={"/"}
                     >
-                      SVG&nbsp;
+                      WEBM
                       <FaArrowDownLong size={15} color="#FFFFFF" />
-                    </Link>{" "}
-                    <button
-                      className="bg-[#0BAC6F] inline-flex items-center w-[30%]  justify-center p-1 rounded-full text-lg font-normal text-white"
-                      onClick={() => handleDownloadJPEG()}
-                    >
-                      JPEG&nbsp;
-                      <FaArrowDownLong size={15} color="#FFFFFF" />
-                    </button>{" "}
+                    </Link>
                     <Link
-                      className="bg-[#0BAC6F] inline-flex w-[30%] justify-center items-center p-1 rounded-full text-lg font-normal text-white"
+                      className="bg-[#0BAC6F] inline-flex items-center w-[30%]  justify-center p-1 rounded-full text-lg font-normal text-white"
                       href={"/"}
                     >
-                      AI&nbsp;
+                      MP4
                       <FaArrowDownLong size={15} color="#FFFFFF" />
                     </Link>
                   </div>
@@ -261,7 +234,7 @@ export default function AnimationsGrid({
         </Modal.Body>
         <ModalCloseButton />
         <Button
-          onClick={handleNextVector}
+          onClick={handleNextAnimation}
           variant={"default"}
           className="absolute bg-white bg-opacity-15 hover:bg-white hover:bg-opacity-30 top-1/2 -right-20 cursor-pointer h-auto w-auto"
         >

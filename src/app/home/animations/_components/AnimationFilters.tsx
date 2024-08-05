@@ -45,7 +45,7 @@ export default function AnimationFilters() {
     sp.set("page", "1");
     router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
-  const handleOrientationHorizontal = () => {
+  const handleOrientationFacebookPost = () => {
     if (sp.get("orientation") === "horizontal") {
       sp.set("orientation", "all");
     } else {
@@ -63,33 +63,25 @@ export default function AnimationFilters() {
     sp.set("page", "1");
     router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
-  const handlFileTypeVector = () => {
+  const handlFileTypeAnimation = () => {
     sp.set("format", "all");
     router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
-  const handlFileTypeSVG = () => {
-    if (sp.get("format") === "svg") {
+  const handlFileTypeWEBM = () => {
+    if (sp.get("format") === "webm") {
       sp.set("format", "all");
     } else {
-      sp.set("format", "svg");
+      sp.set("format", "webm");
     }
     sp.set("page", "1");
     router.push(`${pathname}?${sp.toString()}`,{scroll:false});
   };
-  const handlFileTypeAI = () => {
-    if (sp.get("format") === "ai") {
+
+  const handlFileTypeMP4 = () => {
+    if (sp.get("format") === "mp4") {
       sp.set("format", "all");
     } else {
-      sp.set("format", "ai");
-    }
-    sp.set("page", "1");
-    router.push(`${pathname}?${sp.toString()}`,{scroll:false});
-  };
-  const handlFileTypeJPEG = () => {
-    if (sp.get("format") === "jpeg") {
-      sp.set("format", "all");
-    } else {
-      sp.set("format", "jpeg");
+      sp.set("format", "mp4");
     }
     sp.set("page", "1");
     router.push(`${pathname}?${sp.toString()}`,{scroll:false});
@@ -99,12 +91,12 @@ export default function AnimationFilters() {
     <>
       <div
         className={`border rounded-r-xl p-1 left-0 shadow-xl mr-2 top-0 w-full h-full z-10 md:relative md:max-w-[30%] md:z-0 md:top-0 md:left-0 bg-white flex flex-col ${
-          filter.openFilter === true ? "flex" : "hidden"
+          filter.openAnimationFilter === true ? "flex" : "hidden"
         } `}
       >
         <div className="flex flex-row md:hidden">
           <div className="flex items-center w-1/2">
-            <button onClick={() => filter.setOPenFilter(!filter.openFilter)}>
+            <button onClick={() => filter.setOpenAnimationFilter(!filter.openAnimationFilter)}>
               <MdClose size={22} />
             </button>
             &nbsp;&nbsp;
@@ -155,7 +147,7 @@ export default function AnimationFilters() {
           </div>
           <div className="flex flex-col gap-2">
             <button
-              onClick={handleOrientationHorizontal}
+              onClick={handleOrientationFacebookPost}
               className={`${
                 sp.get("orientation") === "horizontal"
                   ? "bg-[#2E67DD] text-white border-none"
@@ -198,44 +190,34 @@ export default function AnimationFilters() {
           </div>
           <div className="grid grid-cols-2 gap-2">
             <button
-              onClick={handlFileTypeVector}
+              onClick={handlFileTypeAnimation}
               className={`${
                 sp.get("format") === "all"
                   ? "bg-[#2E67DD] text-white border-none"
                   : "bg-white"
               }  hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black`}
             >
-              Vector
+              All
             </button>
             <button
-              onClick={handlFileTypeJPEG}
+              onClick={handlFileTypeMP4}
               className={`${
-                sp.get("format") === "jpeg"
+                sp.get("format") === "mp4"
                   ? "bg-[#2E67DD] text-white border-none"
                   : "bg-white"
               } hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black`}
             >
-              JPEG
+              MP4
             </button>
             <button
-              onClick={handlFileTypeSVG}
+              onClick={handlFileTypeWEBM}
               className={`${
-                sp.get("format") === "svg"
+                sp.get("format") === "webm"
                   ? "bg-[#2E67DD] text-white border-none"
                   : "bg-white"
               } hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black`}
             >
-              SVG
-            </button>
-            <button
-              onClick={handlFileTypeAI}
-              className={`${
-                sp.get("format") === "ai"
-                  ? "bg-[#2E67DD] text-white border-none"
-                  : "bg-white"
-              } hover:text-white hover:border-white hover:bg-[#2E67DD] border rounded-lg p-1 border-black`}
-            >
-              AI
+              WEBM
             </button>
           </div>
         </div>

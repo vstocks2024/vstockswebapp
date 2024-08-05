@@ -4,7 +4,7 @@ import { z } from "zod";
 import Tabs from "../_components/Tabs";
 import AnimationsGrid from "./_components/AnimationsGrid";
 import CombineFilters from "./_components/CombineFilters";
-import { Vector_Url } from "@/lib/types";
+import { Animation_Url} from "@/lib/types";
 import { TotalPages } from "@/lib/types";
 import MainLayout from "./_components/layout/MainLayout";
 import PaginateAnimationGrid from "./_components/PaginateAnimationGrid";
@@ -17,20 +17,20 @@ const SearchParams = z.object({
   sort: z.string().optional(),
 });
 
-async function getVectorUrlData(
+async function getAnimationUrlData(
   currentPage: string,
   currentLicense: string,
   currentOrientation: string,
   currentFormat: string,
   currentSort: string
-): Promise<z.infer<typeof Vector_Url>[]> {
+): Promise<z.infer<typeof Animation_Url>[]> {
   console.log(currentPage);
   console.log(currentLicense);
   console.log(currentOrientation);
   console.log(currentFormat);
 
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/vectors/list_vectors_url/${currentPage}/${currentLicense}/${currentOrientation}/${currentFormat}/${currentSort}`,
+    `${process.env.NEXT_PUBLIC_URL}/animations/list_animations_url/${currentPage}/${currentLicense}/${currentOrientation}/${currentFormat}/${currentSort}`,
     {
       method: "GET",
       cache: "no-store",
@@ -47,14 +47,14 @@ async function getVectorUrlData(
   return res.json();
 }
 
-async function getTotalVectorPages(
+async function getTotalAnimationPages(
   currentPage: string,
   currentLicense: string,
   currentOrientation: string,
   currentFormat: string
 ): Promise<z.infer<typeof TotalPages>> {
   const res = await fetch(
-    `${process.env.NEXT_PUBLIC_URL}/vectors/totalpages/${currentPage}/${currentLicense}/${currentOrientation}/${currentFormat}`,
+    `${process.env.NEXT_PUBLIC_URL}/animations/totalpages/${currentPage}/${currentLicense}/${currentOrientation}/${currentFormat}`,
     {
       method: "GET",
       cache: "no-store",
@@ -78,26 +78,26 @@ export default async function VectorsPage({
   const currentFormat = searchParams?.format || "all";
   const currentSort = searchParams?.sort || "relevance";
 
-  const vectorWithUrlData = getVectorUrlData(
+  const animationWithUrlData = getAnimationUrlData(
     currentPage,
     currentLicense,
     currentOrientation,
     currentFormat,
     currentSort
   );
-  const vectorPages = getTotalVectorPages(
+  const animationPages = getTotalAnimationPages(
     currentPage,
     currentLicense,
     currentOrientation,
     currentFormat
   );
 
-  const [vectorUrlData, totalVectorPages] = await Promise.all([
-    vectorWithUrlData,
-    vectorPages,
+  const [animationUrlData, totalAnimationPages] = await Promise.all([
+    animationWithUrlData,
+    animationPages,
   ]);
 
-  console.log(totalVectorPages);
+  console.log(totalAnimationPages);
 
   return (
     <>
@@ -107,8 +107,8 @@ export default async function VectorsPage({
             <div className="mx-20">
               <Tabs />
               <CombineFilters />
-              <AnimationsGrid vectorUrlData={vectorUrlData} />
-              <PaginateAnimationGrid pages={totalVectorPages} />
+              <AnimationsGrid animationUrlData={animationUrlData} />
+              <PaginateAnimationGrid pages={totalAnimationPages} />
             </div>
           </div>
         </main>

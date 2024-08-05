@@ -9,6 +9,14 @@ const Provider = ({ children}) => {
   const [sizeModal, setSizeModal] = useState("5xl");
   const [vectorItem, setVectorItem] = useState();
   const [vectorItemsArray, setVectorItemsArray] = useState([]);
+  
+  /////////////
+  const [openAnimationModal,setOpenAnimationModal]=useState(false);
+  const [sizeAnimationModal, setSizeAnimationModal] = useState("5xl");
+  const [animationItem, setAnimationItem] = useState();
+  const [animationItemsArray, setAnimationItemsArray]=useState([]);
+
+
   const exposed = {
     openModal,
     vectorItem,
@@ -18,6 +26,14 @@ const Provider = ({ children}) => {
     setOpenModal,
     setVectorItem,
     setSizeModal,
+    openAnimationModal,
+    sizeAnimationModal,
+    animationItem,
+    animationItemsArray,
+    setOpenAnimationModal,
+    setSizeAnimationModal,
+    setAnimationItem,
+    setAnimationItemsArray
   };
 
   return <Context.Provider value={exposed}>{children}</Context.Provider>;

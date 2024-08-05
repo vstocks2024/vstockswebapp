@@ -23,11 +23,11 @@ export default function CombineFilters() {
             </h3>
             <button
               onClick={() => {
-                filter.setOpenFilter(!filter.openFilter)
+                filter.setOpenAnimationFilter(!filter.openAnimationFilter)
               }}
               className=""
             >
-              { filter.openFilter ? (
+              { filter.openAnimationFilter ? (
                 <MdKeyboardArrowUp size={24} />
               ) : (
                 <MdKeyboardArrowDown size={24} />

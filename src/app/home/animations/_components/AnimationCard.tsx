@@ -3,19 +3,19 @@ import React from "react";
 import { z } from "zod";
 import Image from "next/image";
 import { useModal } from "@/context/modal";
-import { Vector_Url } from "@/lib/types";
+import { Animation_Url } from "@/lib/types";
 
 
 
 export default function AnimationCard({
   item,
 }: {
-  item: z.infer<typeof Vector_Url>;
+  item: z.infer<typeof Animation_Url>;
 }) {
   const modal = useModal();
   const handleCardClick=()=>{
-  modal.setOpenModal(true);
-  modal.setVectorItem(item);
+  modal.setOpenAnimationModal(true);
+  modal.setAnimationItem(item);
 }
   return (
     <>
@@ -28,7 +28,7 @@ export default function AnimationCard({
             className="rounded object-fill cursor-pointer"
             loading="lazy"
             alt=""
-            src={item.url}
+            src={item.thumbnail_url}
           />
         </button>
       </div>

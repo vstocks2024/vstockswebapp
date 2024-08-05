@@ -6,7 +6,8 @@ const Context = createContext();
 const Provider = ({ children }) => {
     const router = useRouter();
     const [openFilter,setOpenFilter]=useState(false);
-    const exposed = {openFilter,setOpenFilter};
+    const [openAnimationFilter,setOpenAnimationFilter]=useState(false);
+    const exposed = {openFilter,setOpenFilter,openAnimationFilter,setOpenAnimationFilter};
 
  return <Context.Provider value={exposed}>{children}</Context.Provider>;
 }

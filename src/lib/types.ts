@@ -56,7 +56,7 @@ export const CRUMB=z.object({
 })
 
 
-export const Animations_Url=z.object({
+export const Animation_Url=z.object({
   animation_id: z.string(),
   name: z.string(),
   description: z.string(),

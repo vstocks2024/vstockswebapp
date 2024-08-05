@@ -1,16 +1,26 @@
-"use client"
+"use client";
 import { createContext, useState, useEffect, useContext } from "react";
-import { useRouter } from "next/navigation";
+
 const Context = createContext();
 
 const Provider = ({ children }) => {
-    const router = useRouter();
-    const [sort, setSort] = useState("Most Relevant");
-    const [openSort,setOpenSort]=useState(false);
-    const exposed = {sort,setSort,openSort,setOpenSort};
+  const [sort, setSort] = useState("Most Relevant");
+  const [openSort, setOpenSort] = useState(false);
+  const [sortAnimation, setSortAnimation] = useState("Most Relevant");
+  const [openSortAnimation, setOpenSortAnimation] = useState(false);
+  const exposed = {
+    sort,
+    setSort,
+    openSort,
+    setOpenSort,
+    sortAnimation,
+    setSortAnimation,
+    openSortAnimation,
+    setOpenSortAnimation,
+  };
 
- return <Context.Provider value={exposed}>{children}</Context.Provider>;
-}
+  return <Context.Provider value={exposed}>{children}</Context.Provider>;
+};
 export const useSort = () => useContext(Context);
 
 export default Provider;

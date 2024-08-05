@@ -1,9 +1,11 @@
 "use client";
 
 import axios from "axios";
+import { nanoid } from "nanoid";
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import {z} from "zod";
+
 
 const cData=z.object({
     id:z.string(),
@@ -70,9 +72,9 @@ export default function TemplatesDropDownCard() {
         <div className=" h-full grid gap-1 grid-cols-4 px-4 py-2 items-start justify-between">
           {categoryData.map((item) => {
             return (
-              <>
+              
                 <div
-                  key={`${item.name}_${item.id}`}
+                  key={nanoid()}
                   className=" hover:scale-110  duration-100 ease-in-out transition inline-flex flex-row items-center justify-start"
                 >
                   <Link
@@ -84,7 +86,6 @@ export default function TemplatesDropDownCard() {
                     </h1>
                   </Link>
                 </div>
-              </>
             );
           })}
         </div>

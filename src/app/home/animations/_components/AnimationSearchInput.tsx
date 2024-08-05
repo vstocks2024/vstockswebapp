@@ -4,15 +4,15 @@ import { ChangeEvent, Fragment, useEffect, useState } from "react";
 import { BiLoaderCircle } from "react-icons/bi";
 import { useDebouncedCallback } from "use-debounce";
 import axios from "axios";
-import { Vector_Url } from "@/lib/types";
+import { Animation_Url } from "@/lib/types";
 import { z } from "zod";
 import { nanoid } from "nanoid";
 
 export default function AnmimationSearchInput() {
-  const [items, setItems] = useState<z.infer<typeof Vector_Url>[]>([]);
+  const [items, setItems] = useState<z.infer<typeof  Animation_Url>[]>([]);
   const [isSearching, setIsSearching] = useState<boolean>(false);
 
-  const handleSearchVectors = useDebouncedCallback(
+  const handleSearchAnimations = useDebouncedCallback(
     async (event: ChangeEvent<HTMLInputElement>) => {
       if (event.target.value === "") {
         setItems([]);
@@ -22,7 +22,7 @@ export default function AnmimationSearchInput() {
       setIsSearching(true);
       try {
         const response = await axios.get(
-          `${process.env.NEXT_PUBLIC_URL}/vectors_url/searchvectorname/${event.target.value}`
+          `${process.env.NEXT_PUBLIC_URL}/animations_url/searchanimationname/${event.target.value}`
         );
 
         const result = response.data;
@@ -49,8 +49,8 @@ export default function AnmimationSearchInput() {
       <div className="relative m-1 p-1 w-[76%] max-w-[800px] inline-flex items-center justify-center">
         <input
           type="text"
-          placeholder={"Vectors"}
-          onChange={handleSearchVectors}
+          placeholder={"Animations"}
+          onChange={handleSearchAnimations}
           className="rounded-[77px] capitalize  text-white text-[12px] sm:text-[14px] md:text-[16px] lg:text-[18px] xl:text-[20px] flex-shrink-0  w-full h-12 py-[16px] px-[29px]  outline-none focus:outline-none placeholder:font-poppins400   font-poppins400  font-extralight placeholder:font-extralight  placeholder:text-white not-italic  bg-mycolor1"
         />
 
@@ -85,7 +85,7 @@ export default function AnmimationSearchInput() {
                 <>
                   <div className="p-1" key={nanoid()}>
                     <Link
-                      href={`/editor/${item.vector_id}`}
+                      href={`/editor/${item.animation_id}`}
                       className="flex items-center justify-between w-full cursor-pointer hover:bg-gray-200 p-1 px-2"
                     >
                       <span className="">{item.name}</span>

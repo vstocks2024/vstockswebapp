@@ -104,7 +104,7 @@ export default function VectorFilters() {
       >
         <div className="flex flex-row md:hidden">
           <div className="flex items-center w-1/2">
-            <button onClick={() => filter.setOPenFilter(!filter.openFilter)}>
+            <button onClick={() => filter.setOpenFilter(!filter.openFilter)}>
               <MdClose size={22} />
             </button>
             &nbsp;&nbsp;

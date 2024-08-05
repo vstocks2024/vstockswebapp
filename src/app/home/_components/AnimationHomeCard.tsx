@@ -9,10 +9,10 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Animations_Url } from "@/lib/types";
+import { Animation_Url } from "@/lib/types";
 import { z } from "zod";
 
-export default function AnimationHomeCard({card}:{card:z.infer<typeof Animations_Url>}) {
+export default function AnimationHomeCard({card}:{card:z.infer<typeof Animation_Url>}) {
   return (
     <div>
       <Card className="rounded-md">

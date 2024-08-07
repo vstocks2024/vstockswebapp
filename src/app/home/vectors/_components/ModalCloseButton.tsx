@@ -10,9 +10,9 @@ export default function ModalCloseButton() {
       <Button
         onClick={() => modal.setOpenModal(false)}
         variant={"default"}
-        className="absolute bg-transparent p-3 rounded-full hover:bg-white hover:bg-opacity-20 top-0 -right-[68px] cursor-pointer h-auto w-auto"
+        className="absolute bg-transparent p-2  hover:bg-white hover:bg-opacity-15 top-0 -right-12 cursor-pointer h-auto w-auto"
       >
-        <IoClose size={35} />
+        <IoClose size={28}  color="white" />
       </Button>
     </>
   );

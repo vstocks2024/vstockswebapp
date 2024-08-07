@@ -27,7 +27,7 @@ export default function SimilarVectors() {
       <h4 className="text-[14px] m-0.5 font-semibold">
         More like this
       </h4>
-      <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6 gap-2 m-0.5 p-0.5 ">
+      <div className="grid grid-cols-2  gap-1 md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6  m-0.5 p-0.5 ">
         {categoryArr &&
           categoryArr.map((item) => {
             return (

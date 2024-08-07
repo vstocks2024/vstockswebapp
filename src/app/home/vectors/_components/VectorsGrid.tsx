@@ -102,20 +102,19 @@ export default function VectorsGrid({
 
   const handleModalSize = () => {
     if (typeof window != "undefined") {
-      if (window.innerWidth <= 640) modal.setSizeModal("sm");
+      if (window.innerWidth <= 640) modal.setSizeModal("md");
       else if (window.innerWidth > 640 && window.innerWidth <= 768)
-        modal.setSizeModal("md");
-      else if (window.innerWidth > 768 && window.innerWidth <= 896)
         modal.setSizeModal("lg");
+      else if (window.innerWidth > 768 && window.innerWidth <= 896)
+        modal.setSizeModal("2xl");
       else if (window.innerWidth > 896 && window.innerWidth <= 1024)
         modal.setSizeModal("3xl");
       else if (window.innerWidth > 1024 && window.innerWidth <= 1152)
         modal.setSizeModal("4xl");
       else if (window.innerWidth > 1152 && window.innerWidth <= 1280)
-        modal.setSizeModal("5xl");
-      else if (window.innerWidth > 1280 && window.innerWidth <= 1408)
         modal.setSizeModal("6xl");
-      else modal.setSizeModal("7xl");
+      else if (window.innerWidth > 1280)
+        modal.setSizeModal("7xl");
     }
   };
 
@@ -135,7 +134,7 @@ export default function VectorsGrid({
       <div className="items-start justify-between flex flex-row relative ">
         {filter.openFilter === true ? <VectorFilters key={nanoid()} /> : <></>}
         <div
-          className={`grid grid-cols-2 w-full p-1  place-items-center place-content-evenly auto-rows-max justify-center items-center gap-2 ${
+          className={`grid grid-cols-2 w-full p-1 grid-flow-dense  place-items-center justify-evenly auto-rows-max  items-center gap-1 ${
             filter.openFilter
               ? "md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5"
               : "md:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 2xl:grid-cols-6"
@@ -165,17 +164,17 @@ export default function VectorsGrid({
       >
         <button
           onClick={handlePrevVector}
-          className="absolute p-3 rounded-full  bg-transparent  hover:bg-white hover:bg-opacity-20 top-1/2  -left-[68px] cursor-pointer h-auto w-auto "
+          className="absolute p-2 bg-transparent  hover:bg-white hover:bg-opacity-15 top-1/2  -left-12 cursor-pointer h-auto w-auto"
         >
-          <ChevronLeft color="white" size={35} />
+          <ChevronLeft color="white" size={28} />
         </button>
         <Modal.Body>
           <div className="m-0.5  flex flex-col">
             <div className=" m-0.5  justify-start items-start flex flex-col  lg:flex-row">
-              <div className="relative  m-0.5   flex flex-col items-center justify-center  w-full  lg:w-[60%] xl:w-[70%]">
+              <div className="relative  m-0.5   flex flex-col items-center justify-center  w-full  lg:w-[60%] xl:w-[65%]">
                 <Link className="cursor-pointer" href={"/"}>
                   <img
-                    className={`${modal.vectorItem && modal.vectorItem.orientation==="horizontal" ? "w-[350px] md:w-[400px] lg:w-[500px]  xl:w-[600px] 2xl:w-[700px]" :"w-[350px] md:w-[375px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px]"} rounded-md  aspect-auto`}
+                    className={`h-[350px] md:h-[375px] lg:h-[400px] xl:h-[425px] 2xl:h-[450px] rounded-md  aspect-auto`}
                     alt=""
                     src={modal.vectorItem ? modal.vectorItem.url : ""}
                   />
@@ -185,19 +184,25 @@ export default function VectorsGrid({
                   <PiShareFatFill size={30} />
                 </div>
               </div>
-              <div className="relative hidden lg:flex lg:flex-col m-0.5  lg:h-auto lg:w-[50%]">
+              <div className="relative hidden lg:flex lg:flex-col lg:items-start lg:justify-between m-0.5 lg:h-auto lg:w-[40%] xl:w-[35%] xl:h-[425px] 2xl:h-[450px]">
+              <div className=" m-0.5 p-1 flex flex-row items-center justify-start ">
+                  <h3 className="text-lg font-bold">Name</h3>&nbsp;&nbsp;
+                  <span className="text-sm font-normal text-wrap">
+                    {modal.vectorItem ? modal.vectorItem.name : ""}
+                  </span>
+                </div>
                 <div className=" m-0.5 p-1 ">
                   <h3 className="text-lg font-bold">Description</h3>
                   <p className="text-sm font-normal text-wrap">
                     {modal.vectorItem ? modal.vectorItem.description : ""}
                   </p>
                 </div>
-                <div className="m-0.5 p-1 h-auto hidden lg:flex lg:flex-col items-center space-y-1">
+                <div className="m-0.5 w-full p-1 h-auto hidden lg:flex lg:flex-col items-center space-y-1">
                   <p className="text-base font-semibold  m-0.5 p-1">
                     Download or edit in your computer as
                   </p>
 
-                  <div className="inline-flex w-full items-center justify-around  m-0.5 p-1">
+                  <div className="flex flex-row w-full items-center justify-around  m-0.5 p-1">
                     <Link
                       className="bg-[#0BAC6F] inline-flex items-center justify-center w-[30%] p-1 rounded-full text-lg font-normal text-white"
                       download
@@ -222,7 +227,7 @@ export default function VectorsGrid({
                     </Link>
                   </div>
                 </div>
-                <div className=" hidden lg:flex lg:flex-col bg-[#F3F3F3] h-auto   items-center space-y-1 px-3 py-1">
+                <div className=" hidden lg:flex lg:flex-col bg-[#F3F3F3] h-auto w-full  items-center space-y-1 px-3 py-1">
                   <p className="text-lg font-normal m-0.5">OR</p>
                   <div className=" inline-flex flex-row items-center w-full justify-around m-0.5 p-1">
                     <button className="rounded-full  p-2 text-base w-1/2 text-white   m-0.5 bg-[#0B85AC]">
@@ -261,9 +266,9 @@ export default function VectorsGrid({
         <button
           onClick={handleNextVector}
           
-          className="absolute bg-transparent hover:bg-white hover:bg-opacity-20 top-1/2 p-3  rounded-full  -right-[68px] cursor-pointer h-auto w-auto"
+          className="absolute bg-transparent hover:bg-white hover:bg-opacity-15 top-1/2 p-2 -right-12 cursor-pointer h-auto w-auto"
         >
-          <ChevronRight color="white" size={35} />
+          <ChevronRight color="white" size={28} />
         </button>
       </Modal>
     </>

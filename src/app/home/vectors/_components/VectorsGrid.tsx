@@ -108,14 +108,12 @@ export default function VectorsGrid({
       else if (window.innerWidth > 768 && window.innerWidth <= 896)
         modal.setSizeModal("lg");
       else if (window.innerWidth > 896 && window.innerWidth <= 1024)
-        modal.setSizeModal("2xl");
-      else if (window.innerWidth > 1024 && window.innerWidth <= 1152)
         modal.setSizeModal("3xl");
-      else if (window.innerWidth > 1152 && window.innerWidth <= 1280)
+      else if (window.innerWidth > 1024 && window.innerWidth <= 1152)
         modal.setSizeModal("4xl");
-      else if (window.innerWidth > 1280 && window.innerWidth <= 1408)
+      else if (window.innerWidth > 1152 && window.innerWidth <= 1280)
         modal.setSizeModal("5xl");
-      else if (window.innerWidth > 1408 && window.innerWidth <= 1536)
+      else if (window.innerWidth > 1280 && window.innerWidth <= 1408)
         modal.setSizeModal("6xl");
       else modal.setSizeModal("7xl");
     }
@@ -163,21 +161,21 @@ export default function VectorsGrid({
         position={"center"}
         size={modal.sizeModal}
         onClose={() => modal.setOpenModal(false)}
+        className="h-[90vh]"
       >
-        <Button
+        <button
           onClick={handlePrevVector}
-          variant={"default"}
-          className="absolute  bg-white bg-opacity-15 hover:bg-white hover:bg-opacity-30 top-1/2  -left-20 cursor-pointer h-auto w-auto "
+          className="absolute p-3 rounded-full  bg-transparent  hover:bg-white hover:bg-opacity-20 top-1/2  -left-[68px] cursor-pointer h-auto w-auto "
         >
-          <ChevronLeft size={30} />
-        </Button>
+          <ChevronLeft color="white" size={35} />
+        </button>
         <Modal.Body>
           <div className="m-0.5  flex flex-col">
             <div className=" m-0.5  justify-start items-start flex flex-col  lg:flex-row">
-              <div className="relative  m-0.5   flex flex-col items-center justify-center  w-full  lg:w-[50%]">
+              <div className="relative  m-0.5   flex flex-col items-center justify-center  w-full  lg:w-[60%] xl:w-[70%]">
                 <Link className="cursor-pointer" href={"/"}>
                   <img
-                    className="cursor-pointer rounded-md w-[350px] h-[350px] md:w-[375px] md:h-[375px] xl:w-[400px] xl:h-[400px]"
+                    className={`${modal.vectorItem && modal.vectorItem.orientation==="horizontal" ? "w-[350px] md:w-[400px] lg:w-[500px]  xl:w-[600px] 2xl:w-[700px]" :"w-[350px] md:w-[375px] lg:w-[400px] xl:w-[450px] 2xl:w-[500px]"} rounded-md  aspect-auto`}
                     alt=""
                     src={modal.vectorItem ? modal.vectorItem.url : ""}
                   />
@@ -260,13 +258,13 @@ export default function VectorsGrid({
           </div>
         </Modal.Body>
         <ModalCloseButton />
-        <Button
+        <button
           onClick={handleNextVector}
-          variant={"default"}
-          className="absolute bg-white bg-opacity-15 hover:bg-white hover:bg-opacity-30 top-1/2 -right-20 cursor-pointer h-auto w-auto"
+          
+          className="absolute bg-transparent hover:bg-white hover:bg-opacity-20 top-1/2 p-3  rounded-full  -right-[68px] cursor-pointer h-auto w-auto"
         >
-          <ChevronRight size={30} />
-        </Button>
+          <ChevronRight color="white" size={35} />
+        </button>
       </Modal>
     </>
   );

@@ -15,7 +15,7 @@ export default function SimilarVectorCard({card}:{card:z.infer<typeof Vector_Url
     <>
     <button onClick={handleCardClick}>
           <img
-            className="border w-[150px] h-[150px] rounded-md aspect-auto"
+            className={`border w-[200px] rounded-md aspect-auto`}
             src={card.url}
             alt=""
           />

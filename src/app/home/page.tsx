@@ -17,10 +17,9 @@ export default function Home() {
         <NewlyAdded />
       </main>
       <EditOwn />
-        <div className="mt-[45px]">
-          <PromotionalViews />
-        </div>
-      
+      <div className="mt-[45px]">
+        <PromotionalViews />
+      </div>
       <RecommendedViews />
       <main className="container mx-auto bg-[#FEFAFF]">
         <ClientReview />

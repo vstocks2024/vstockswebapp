@@ -6,7 +6,7 @@ const Context = createContext();
 const Provider = ({ children}) => {
   const router = useRouter();
   const [openModal, setOpenModal] = useState(false);
-  const [sizeModal, setSizeModal] = useState("5xl");
+  const [sizeModal, setSizeModal] = useState("6xl");
   const [vectorItem, setVectorItem] = useState();
   const [vectorItemsArray, setVectorItemsArray] = useState([]);
   

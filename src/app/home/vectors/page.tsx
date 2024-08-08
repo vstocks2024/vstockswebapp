@@ -1,4 +1,3 @@
-
 import Image from "next/image";
 
 import { z } from "zod";
@@ -10,17 +9,8 @@ import { useModal } from "@/context/modal";
 import { BsSliders } from "react-icons/bs";
 import { MdKeyboardArrowDown, MdKeyboardArrowUp } from "react-icons/md";
 import CombineFilters from "./_components/CombineFilters";
-import { Vector_Url } from "@/lib/types";
-import { TotalPages } from "@/lib/types";
+import { Vector_Url, TotalPages, SearchParams } from "@/lib/types";
 import MainLayout from "./_components/layout/MainLayout";
-
-const SearchParams = z.object({
-  page: z.string().optional(),
-  license: z.string().optional(),
-  orientation: z.string().optional(),
-  format: z.string().optional(),
-  sort: z.string().optional(),
-});
 
 async function getVectorUrlData(
   currentPage: string,

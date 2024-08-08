@@ -28,17 +28,23 @@ import SimilarVectors from "./SimilarVectors";
 import ModalCloseButton from "./ModalCloseButton";
 import RelatedTag from "./RelatedTag";
 import { Skeleton } from "@/components/ui/skeleton";
+import { usePathname, useRouter, useSearchParams } from "next/navigation";
 
 export default function VectorsGrid({
   vectorUrlData,
 }: {
   vectorUrlData: z.infer<typeof Vector_Url>[];
 }) {
+  const searchParams = useSearchParams();
+  const sp = new URLSearchParams(searchParams);
+  const pathname = usePathname();
+  const router = useRouter();
   const modal = useModal();
   const filter = useFilter();
   const sort = useSort();
   const [likes, setLikes] = useState<boolean>(false);
   modal.setVectorItemsArray(vectorUrlData);
+
 
   const handlePrevVector = () => {
     const currentIndex = modal.vectorItemsArray?.findIndex(
@@ -113,8 +119,7 @@ export default function VectorsGrid({
         modal.setSizeModal("4xl");
       else if (window.innerWidth > 1152 && window.innerWidth <= 1280)
         modal.setSizeModal("6xl");
-      else if (window.innerWidth > 1280)
-        modal.setSizeModal("7xl");
+      else if (window.innerWidth > 1280) modal.setSizeModal("7xl");
     }
   };
 
@@ -125,9 +130,14 @@ export default function VectorsGrid({
     };
   }, [modal.sizeModal]);
 
-  useEffect(() => {}, [modal.vectorItem]);
+  
+  useEffect(() => {
+    if(!modal.vectorItem) return;
+    sp.set("uuid", modal.vectorItem?.vector_id);
+    router.push(`${pathname}?${sp.toString()}`);
+  }, [modal.vectorItem]);
 
-  useEffect(() => {}, [likes]);
+
 
   return (
     <>
@@ -185,7 +195,7 @@ export default function VectorsGrid({
                 </div>
               </div>
               <div className="relative hidden lg:flex lg:flex-col lg:items-start lg:justify-between m-0.5 lg:h-auto lg:w-[40%] xl:w-[35%] xl:h-[425px] 2xl:h-[450px]">
-              <div className=" m-0.5 p-1 flex flex-row items-center justify-start ">
+                <div className=" m-0.5 p-1 flex flex-row items-center justify-start ">
                   <h3 className="text-lg font-bold">Name</h3>&nbsp;&nbsp;
                   <span className="text-sm font-normal text-wrap">
                     {modal.vectorItem ? modal.vectorItem.name : ""}
@@ -265,7 +275,6 @@ export default function VectorsGrid({
         <ModalCloseButton />
         <button
           onClick={handleNextVector}
-          
           className="absolute bg-transparent hover:bg-white hover:bg-opacity-15 top-1/2 p-2 -right-12 cursor-pointer h-auto w-auto"
         >
           <ChevronRight color="white" size={28} />

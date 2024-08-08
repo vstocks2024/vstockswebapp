@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const Vector_Url = z.object({
+  serial_no:z.number(),
   vector_id: z.string(),
   name: z.string(),
   description: z.string(),
@@ -57,6 +58,7 @@ export const CRUMB=z.object({
 
 
 export const Animation_Url=z.object({
+  serial_no:z.number(),
   animation_id: z.string(),
   name: z.string(),
   description: z.string(),
@@ -69,4 +71,13 @@ export const Animation_Url=z.object({
   thumbnail_url: z.string(),
   createdAt: z.date(),
   updatedAt: z.date(),
+});
+
+export const SearchParams = z.object({
+  page: z.string().optional(),
+  license: z.string().optional(),
+  orientation: z.string().optional(),
+  format: z.string().optional(),
+  sort: z.string().optional(),
+  uuid:z.string().optional()
 });

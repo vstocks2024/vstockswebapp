@@ -1,5 +1,6 @@
 "use client";
 
+import { supabase } from "@/utils/supabaseClient";
 import axios from "axios";
 import { nanoid } from "nanoid";
 import Link from "next/link";
@@ -61,9 +62,21 @@ export default function TemplatesDropDownCard() {
       console.log(error);
     }
   };
+  const handleGetCategoryIdAndName2 =async ()=>{
+   try{
+   const resp= await fetch(`${process.env.NEXT_PUBLIC_URL}/categories/listidname`);
+   if(!resp.ok) return [];
+   const data:z.infer<typeof cData>[]=await resp.json();
+   setCategoryData(data);
+   }
+   catch(error){
+    console.log(error);
+   }
+
+  }
 
   useEffect(() => {
-    handleGetCategoryIdAndName();
+    handleGetCategoryIdAndName2();
   }, []);
   return (
     <>

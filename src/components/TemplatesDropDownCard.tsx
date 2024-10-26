@@ -67,6 +67,7 @@ export default function TemplatesDropDownCard() {
    const resp= await fetch(`${process.env.NEXT_PUBLIC_URL}/categories/listidname`);
    if(!resp.ok) return [];
    const data:z.infer<typeof cData>[]=await resp.json();
+   console.log(data);
    setCategoryData(data);
    }
    catch(error){

@@ -5,17 +5,18 @@ import axios from "axios";
 import { nanoid } from "nanoid";
 import Link from "next/link";
 import { useEffect, useState } from "react";
-import {z} from "zod";
-
+import { z} from "zod";
 
 const cData=z.object({
     id:z.string(),
     name:z.string()
 });
 
+
+
 export default function TemplatesDropDownCard() {
   const [categoryData, setCategoryData] = useState<z.infer<typeof cData>[]>([]);
-
+  
 //   const categoryData = [
 //     { id: 1, name: "Dussehra" },
 //     { id: 2, name: "Diwali" },
@@ -76,8 +77,10 @@ export default function TemplatesDropDownCard() {
 
   }
 
+
+
   useEffect(() => {
-    handleGetCategoryIdAndName2();
+    handleGetCategoryIdAndName();
   }, []);
   return (
     <>

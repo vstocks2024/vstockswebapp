@@ -139,12 +139,14 @@ export default function Category() {
           </Link>
           <Link href={"/home/animations"}>
             <div className="cursor-pointer flex flex-col items-center justify-between space-y-[30px]">
-              <img
+              <video
                 width={250}
                 height={142}
-                className="shadow-category bg-cover min-w-[250px] min-h-[142px]  bg-cover bg-[#D9D9D9]  bg-no-repeat rounded-[30px] border border-solid border-[#FFF]"
-                src="./images/ne2.svg"
-                alt="Video Animations"
+                className="shadow-category min-w-[250px] min-h-[142px]  bg-cover bg-[#D9D9D9]  bg-no-repeat rounded-[30px] border border-solid border-[#FFF]"
+                src="https://s3.ap-south-1.amazonaws.com/vstock.bucket.1/animations/c416e86b-f9a7-4cba-90c2-8b26d06a4719"
+                muted
+                loop
+                autoPlay
               />
               <h3 className="text-center font-normal font-poppins400  leading-normal text-[16px] md:text-[20px] ">
                 Video Animations

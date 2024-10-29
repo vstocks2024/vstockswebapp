@@ -12,7 +12,7 @@ const Provider = ({ children}) => {
   
   /////////////
   const [openAnimationModal,setOpenAnimationModal]=useState(false);
-  const [sizeAnimationModal, setSizeAnimationModal] = useState("5xl");
+  const [sizeAnimationModal, setSizeAnimationModal] = useState("7xl");
   const [animationItem, setAnimationItem] = useState();
   const [animationItemsArray, setAnimationItemsArray]=useState([]);
 

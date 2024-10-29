@@ -41,7 +41,8 @@ export default function AnimationsGrid({
   modal.setAnimationItemsArray(animationUrlData);
 
   const handlePrevAnimation = () => {
-    const currentIndex = modal.animationItemsArray?.findIndex(
+    if(!modal.animationItemsArray) return;
+    const currentIndex = modal.animationItemsArray.findIndex(
       (element: z.infer<typeof  Animation_Url>) =>
         element.animation_id === modal.animationItem.animation_id
     );
@@ -69,8 +70,7 @@ export default function AnimationsGrid({
 
   const handleUpdateLikes = async () => {
     const resp = await axios.put(
-      `${process.env.NEXT_PUBLIC_URL}/vectors/${modal.animationItem.animation_id}`,
-      {
+      `${process.env.NEXT_PUBLIC_URL}/vectors/${modal.animationItem.animation_id}`,{
         headers: {
           "Content-Type": "application/json",
         },

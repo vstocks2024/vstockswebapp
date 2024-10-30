@@ -241,7 +241,7 @@ export default function VectorsGrid({
                     <button className="rounded-full  p-2 text-base w-1/2 text-white   m-0.5 bg-[#0B85AC]">
                       Edit Online
                     </button>
-                    <button className="rounded-full  p-2 text-base w-1/2 text-white  m-0.5 bg-[#0B85AC]">
+                    <button onClick={()=>router.push("/editor")} className="rounded-full  p-2 text-base w-1/2 text-white  m-0.5 bg-[#0B85AC]">
                       Edit Animation
                     </button>
                   </div>

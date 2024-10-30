@@ -1,5 +1,5 @@
 import React from 'react'
-import MainLayout from './_components/layout/MainLayout';
+import MainLayout from '../_components/layout/MainLayout';
 
 export default function EditorIDPage() {
   return (<>

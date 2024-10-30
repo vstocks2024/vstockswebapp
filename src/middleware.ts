@@ -14,6 +14,9 @@ export async function middleware(req:NextRequest) {
   if(data?.session && req.nextUrl.pathname.startsWith('/premium')){
     return NextResponse.redirect(new URL('/', req.url))
   }
+  if(data?.session && req.nextUrl.pathname.startsWith('/login')){
+    return NextResponse.redirect(new URL('/projects', req.url))
+  }
 
   // Must be a session to see these routes
   if (

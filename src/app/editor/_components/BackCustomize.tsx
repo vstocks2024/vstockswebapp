@@ -1,13 +1,14 @@
 "use client";
 
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import React from "react";
 import { Button } from "../../../components/ui/button";
 
 export const BackCustomize = () => {
   const router = useRouter();
+  const pathname= usePathname();
   return (
-    <div className="flex flex-row w-full py-3 px-2">
+    <div className="flex flex-row w-full bg-[#000] py-3 px-2">
       <div className="justify-start  m-1 flex flex-row items-center">
         <Button
           onClick={() => router.back()}
@@ -18,7 +19,7 @@ export const BackCustomize = () => {
       </div>
       <div className="flex flex-row  items-center justify-center w-full">
         <h1 className="item-center justify-center text-center text-xl text-[#CCCCCC] ">
-          Create Your Animation
+          {pathname==="/editor" ? "Create Your Animation": "Customize Your Animation"}
         </h1>
       </div>
     </div>
